@@ -23,13 +23,12 @@ I have learned Java, DrRacket, C++ programming, and I have done some class proje
     5) Music Editor (Java)
 
 
-webdev:
-    This repository is used to web development class, for designing web applicaiton and so on.
+webdev : This repository is used to web development class, for designing web applicaiton and so on.
 
 
 Hosted environment on Heroku : https://yidanchang-webdev-summer2017.herokuapp.com/
-Link to your project : https://yidanchang-webdev-summer2017.herokuapp.com/project/index.html
-Link to your assignment : https://yidanchang-webdev-summer2017.herokuapp.com/assignment/index.html
+Link to project : https://yidanchang-webdev-summer2017.herokuapp.com/project/index.html
+Link to assignment : https://yidanchang-webdev-summer2017.herokuapp.com/assignment/index.html
 
 
 
