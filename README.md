@@ -24,9 +24,10 @@ I have learned Java, DrRacket, C++ programming, and I have done some class proje
 
 webdev : This repository is used to web development class, for designing web applicaiton and so on.
 
-Hosted environment on Heroku : https://yidanchang-webdev-summer2017.herokuapp.com/
-Link to project : https://yidanchang-webdev-summer2017.herokuapp.com/project/index.html
-Link to assignment : https://yidanchang-webdev-summer2017.herokuapp.com/assignment/index.html
+Links:
+1. Hosted environment on Heroku : https://yidanchang-webdev-summer2017.herokuapp.com/
+2. Link to project : https://yidanchang-webdev-summer2017.herokuapp.com/project/index.html
+3. Link to assignment : https://yidanchang-webdev-summer2017.herokuapp.com/assignment/index.html
 
 
 
