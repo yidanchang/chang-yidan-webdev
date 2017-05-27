@@ -1,0 +1,33 @@
+
+<body>
+<div class="container-fluid">
+    <div class="imagecontainer">
+        <img src="https://haroldmansfield.com/wp-content/uploads/2016/02/survey-header.png"/>
+    </div>
+    <h3>Register</h3>
+    <label for="username">Username</label>
+    <input type="text"
+           id="username"
+           class="form-control"
+           placeholder="Username, such as 'mike123'"/>
+
+    <label for="password">Password</label>
+    <input type="password"
+           id="password"
+           class="form-control"
+           placeholder="Password, such as '123456qwerty'"/>
+
+    <label for="confirm Password">Confirm Password</label>
+    <input type="password"
+           id="confirm Password"
+           class="form-control"
+           placeholder="Confirm password"/>
+
+    <a ng-click="model.register(name, password, confirmpassword)"
+       class="btn btn-primary btn-block">
+        Register
+    </a>
+
+    <a class="btn btn-danger  btn-block"
+       href="#!/login">Cancel</a>
+</div>
