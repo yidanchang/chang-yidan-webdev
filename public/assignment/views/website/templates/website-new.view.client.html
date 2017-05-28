@@ -19,6 +19,8 @@
     </div>
 </nav>
 
+<div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+
 <div class="container-fluid">
 
     <div class="row">
@@ -63,8 +65,6 @@
                 </li>
             </ul>
         </div>
-
-        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
 
         <div class="col-xs-12 col-sm-8">
             <label for="name">Name</label>

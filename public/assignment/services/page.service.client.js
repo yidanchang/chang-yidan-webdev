@@ -1,23 +1,24 @@
+
 (function () {
     angular
         .module('WebAppMaker')
         .service('pageService', pageService);
 
     function pageService() {
-        this.findpagesByWebsiteId = findpagesByWebsiteId;
-        this.findpageById = findpageById;
-        this.deletepage = deletepage;
-        this.createpage = createpage;
-        this.updatepage= updatepage;
+        this.findPagesByWebsiteId = findPagesByWebsiteId;
+        this.findPageById = findPageById;
+        this.deletePage = deletePage;
+        this.createPage = createPage;
+        this.updatePage= updatePage;
 
         var pages = [
-                { "_id": "321", "name": "Post 1", "pageId": "456", "description": "Lorem" },
-                { "_id": "432", "name": "Post 2", "pageId": "456", "description": "Lorem" },
-                { "_id": "543", "name": "Post 3", "pageId": "456", "description": "Lorem" }
+                { "_id": "321", "name": "Post 1", "websiteId": "456", "title": "Lorem" },
+                { "_id": "432", "name": "Post 2", "websiteId": "456", "title": "Lorem" },
+                { "_id": "543", "name": "Post 3", "websiteId": "456", "title": "Lorem" }
         ];
 
 
-        function updatepage(pageId, page) {
+        function updatePage(pageId, page) {
             for (var p in pages) {
                 if (pages[p]._id === pageId) {
                     pages[p] = page;
@@ -25,28 +26,29 @@
             }
         }
 
-        function createpage(websiteid, page) {
+        function createPage(websiteId, page) {
             page._id = (new Date()).getTime() + "";
+            page.websiteId = websiteId;
             pages.push(page);
         }
 
-        function deletepage(pageId) {
-            var page = findpageById(pageId);
+        function deletePage(pageId) {
+            var page = findPageById(pageId);
             var index = pages.indexOf(page);
             pages.splice(index, 1);
         }
 
-        function findpageById(pageId) {
+        function findPageById(pageId) {
             return pages.find(function (page) {
                 return page._id === pageId;
             });
         }
 
-        function findpagesByWebsiteId(websiteId) {
+        function findPagesByWebsiteId(websiteId) {
             var results = [];
 
             for(var p in pages) {
-                if(pages[p].pageId === websiteId) {
+                if(pages[p].websiteId === websiteId) {
                     pages[p].created = new Date();
                     pages[p].accessed = new Date();
                     results.push(pages[p]);

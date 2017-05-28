@@ -22,7 +22,6 @@
                 developerId: model.website.developerId,
                 description: model.website.description
             };
-
         }
         init();
 

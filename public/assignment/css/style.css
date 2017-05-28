@@ -11,7 +11,7 @@ nav.navbar.navbar-default.navbar-fixed-top {
 
 body {
     padding-top: 60px;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
 }
 
 .navbar-default {
@@ -55,26 +55,17 @@ body {
     opacity: 0.7;
     padding: 5px;
     border-bottom-left-radius: 10px;
+    z-index: 1000;
 }
 
-.videocontainer > .wd-widget-toolbar {
-    position: absolute;
-    right: 0px;
-    background: white;
-    opacity: 0.7;
-    padding: 5px;
-    border-bottom-left-radius: 10px;
-}
-
-
-.imagecontainer > img {
+img {
     vertical-align: middle;
     width: 100%;
     margin-bottom: 5px;
 }
 
 
-.wd-widget > .videocontainer {
+.wd-widget .videocontainer {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;

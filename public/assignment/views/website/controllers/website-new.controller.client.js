@@ -18,7 +18,7 @@
 
         function createWebsite(website) {
             if (typeof website === 'undefined') {
-                model.error = "Fail to create! Both 'Name' and 'Description' are empty";
+                model.error = "Fail to create! Both 'Name' and 'Description' cannot be empty";
             } else {
                 website.developerId = model.userId;
                 websiteService.createWebsite(website);

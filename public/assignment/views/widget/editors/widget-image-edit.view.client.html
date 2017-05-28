@@ -1,0 +1,46 @@
+<div class="container-fluid">
+
+    <label for="name">Name</label>
+    <input ng-model="model.widget.name"
+           class="form-control"
+           placeholder="Image Name"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input ng-model="model.widget.text"
+           class="form-control"
+           placeholder="Image Description"
+           id="text"/>
+
+    <label for="url">URL</label>
+    <input ng-model="model.widget.url"
+           class="form-control"
+           placeholder="https://"
+           id="url"/>
+
+    <label for="width">Width</label>
+    <input ng-model="model.widget.width"
+           class="form-control"
+           placeholder="100%"
+           value="100%"
+           id="width"/>
+
+    <label for="file">Upload</label>
+    <input id="file" multiple type="file" class="form-control"/>
+
+    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+       class="btn btn-block btn-primary">Upload Image</a>
+
+    <a ng-click="model.deleteWidget(model.widget._id)"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+
+    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+       class="btn btn-block btn-success">
+        Cancel
+    </a>
+
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
