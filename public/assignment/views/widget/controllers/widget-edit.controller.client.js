@@ -16,20 +16,39 @@
         model.updateWidget = updateWidget;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
-            model.widget = widgetService.findWidgetById(model.widgetId);
+            widgetService
+                .findAllWidgetsForPage(model.pageId)
+                .then(renderWidgets);
+
+            widgetService
+                .findWidgetById(model.widgetId)
+                .then(renderWidget);
         }
+
         init();
 
+        function renderWidgets(widgets) {
+            model.widgets = widgets;
+        }
+
+        function renderWidget(widget) {
+            model.widget = widget;
+        }
+
         function deleteWidget(widgetId) {
-            widgetService.deleteWidget(widgetId);
-            $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+            widgetService
+                .deleteWidget(widgetId)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                })
         }
 
         function updateWidget(widgetId, widget) {
-            widgetService.updateWidget(widgetId, widget);
-            $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+            widgetService
+                .updateWidget(widgetId, widget)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                })
         }
     }
-
 })();

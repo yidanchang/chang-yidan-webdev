@@ -15,26 +15,39 @@
         model.updatePage = updatePage;
 
         function init() {
-            model.pages = pageService.findPagesByWebsiteId(model.websiteId);
-            model.page = pageService.findPageById(model.pageId);
-            model.page2 = {
-                _id: model.page._id,
-                name: model.page.name,
-                websiteId: model.page.websiteId,
-                title: model.page.title
-            };
+            // model.websites = websiteService.findWebsitesByUser(model.userId);
+            pageService
+                .findAllPagesForWebsite(model.websiteId)
+                .then(renderPages);
+
+            pageService
+                .findPageById(model.pageId)
+                .then(renderPage);
         }
         init();
 
+        function renderPages(pages) {
+            model.pages = pages;
+        }
+
+        function renderPage(page) {
+            model.page2 = page;
+        }
+
         function deletePage(pageId) {
-            pageService.deletePage(pageId);
-            $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page');
+            pageService
+                .deletePage(pageId)
+                .then(function () {
+                    $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page');
+                })
         }
 
         function updatePage(pageId, page) {
-            pageService.updatePage(pageId, page);
-            $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page');
+            pageService
+                .updatePage(pageId, page)
+                .then(function () {
+                    $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page');
+                })
         }
     }
-
 })();

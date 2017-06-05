@@ -13,18 +13,24 @@
         model.createPage = createPage;
 
         function init() {
-            model.pages = pageService.findPagesByWebsiteId(model.websiteId);
+            pageService
+                .findAllPagesForWebsite(model.websiteId)
+                .then(renderPages);
         }
         init();
 
-        function createPage(websiteId, page) {
+        function renderPages(pages) {
+            model.pages = pages;
+        }
+
+        function createPage(page) {
             if (typeof page === 'undefined') {
                 model.error = "Fail to create! Both 'Name' and 'Title' cannot be empty";
-            } else {
-                page.websiterId = websiteId;
-                pageService.createPage(websiteId, page);
-                $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page');
             }
+            pageService.createPage(model.websiteId, page)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page');
+                })
         }
     }
 })();

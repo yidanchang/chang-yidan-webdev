@@ -85,3 +85,7 @@ img {
 nav.navbar.navbar-default {
     background-image: none;
 }
+
+.btn {
+    margin-top: 10px !important;
+}

@@ -14,23 +14,36 @@
         model.createWidget = createWidget;
 
         function init() {
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
+            widgetService
+                .findAllWidgetsForPage(model.pageId)
+                .then(renderWidgets);
         }
         init();
 
+        function renderWidgets(widgets) {
+            model.widgets = widgets;
+        }
+
         function createWidget(widgetType) {
-            var newId = widgetType.toString() + (new Date()).getTime() + "";
+            //var newId = widgetType.toString() + (new Date()).getTime() + "";
             var newWidget = {
-                _id: newId,
+                //_id: newId,
                 widgetType: widgetType,
                 pageId: model.pageId
             };
-            // For default heading size
+            // For default heading text and size
             if (widgetType === 'HEADING') {
+                newWidget.text = "GIZMODO";
                 newWidget.size = 1;
             }
-            widgetService.createWidget(model.pageId, newWidget);
-            $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + newId);
+            if (widgetType === 'YOUTUBE') {
+                newWidget.url = "";
+            }
+            widgetService
+                .createWidget(model.pageId, newWidget)
+                .then(function (widget) {
+                    $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id);
+                })
         }
     }
 })();

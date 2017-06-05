@@ -14,25 +14,46 @@
         model.updateWebsite = updateWebsite;
 
         function init() {
-            model.websites = websiteService.findWebsitesByUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.websiteId);
-            model.website2 = {
-                _id: model.website._id,
-                name: model.website.name,
-                developerId: model.website.developerId,
-                description: model.website.description
-            };
+            // model.websites = websiteService.findWebsitesByUser(model.userId);
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(renderWebsites);
+
+            websiteService
+                .findWebsiteById(model.websiteId)
+                .then(renderWebsite);
         }
         init();
 
+        function renderWebsites(websites) {
+            model.websites = websites;
+        }
+
+        function renderWebsite(website) {
+            model.website2 = website;
+        }
+
+
         function deleteWebsite(websiteId) {
-            websiteService.deleteWebsite(websiteId);
-            $location.url('/user/' + model.userId + '/website');
+            websiteService
+                .deleteWebsite(websiteId)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website');
+                })
         }
 
         function updateWebsite(websiteId, website) {
-            websiteService.updateWebsite(websiteId, website);
-            $location.url('/user/' + model.userId + '/website');
+            // model.website2 = {
+            //     _id: model.website._id,
+            //     name: model.website.name,
+            //     developerId: model.website.developerId,
+            //     description: model.website.description
+            // };
+            websiteService
+                .updateWebsite(websiteId, website)
+                .then(function () {
+                    $location.url('/user/' + model.userId + '/website');
+                })
         }
     }
 

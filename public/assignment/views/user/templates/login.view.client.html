@@ -3,7 +3,9 @@
         <img src="http://www.clinicallogistica.com/wp-content/uploads/2015/03/login.jpg"/>
     </div>
 
-    <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
     <label for="username">Username</label>
     <input ng-model="username"

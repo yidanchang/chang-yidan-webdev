@@ -11,7 +11,7 @@
                 Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWebsite(model.website2._id, model.website2)"
+                <a ng-click="model.updateWebsite(model.websiteId, model.website2)"
                    class="navbar-link">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
@@ -20,9 +20,10 @@
     </div>
 </nav>
 
-<div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
-
 <div class="container-fluid">
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
 
     <div class="row">
         <div class="col-xs-4 hidden-xs">
@@ -73,7 +74,6 @@
             <input ng-model="model.website2.name"
                    class="form-control"
                    placeholder="Website Name"
-                   value="Blogger"
                    id="name"/>
 
             <label for="description">Website Description</label>
@@ -82,7 +82,6 @@
                       rows="5"
                       placeholder="So big it is its own country"
                       class="form-control">
-                A blog (a truncation of the expression "weblog")[1] is a discussion or informational website published on the World Wide Web consisting of discrete, often informal diary-style text entries ("posts"). Posts are typically displayed in reverse chronological order, so that the most recent post appears first, at the top of the web page.
             </textarea>
 
             <a ng-click="model.deleteWebsite(model.websiteId)"
