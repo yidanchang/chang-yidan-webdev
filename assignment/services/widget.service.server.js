@@ -88,8 +88,9 @@ function sortWidget (req, res) {
     var originalIndex = result[initial];
     var newIndex = result[final];
 
+    var widget = widgets[originalIndex];
     widgets.splice(originalIndex, 1);
-    widgets.splice(newIndex, 0, widgets[originalIndex]);
+    widgets.splice(newIndex, 0, widget);
 
     res.sendStatus(200)
 }
