@@ -5,7 +5,8 @@
 
     function widgetListController($routeParams,
                                   widgetService,
-                                  $sce) {
+                                  $sce,
+                                  $scope) {
         var model = this;
 
         model.userId = $routeParams['userId'];
@@ -27,6 +28,11 @@
             model.widgets = widgets;
         }
 
+        $scope.$on('fromTo', function(event, data) {
+            widgetService
+                .sortWidget(data.pageId, data);
+        });
+
         function widgetUrl(widget) {
             var url = 'views/widget/templates/widget-'+widget.widgetType.toLowerCase()+'.view.client.html';
             return url;
@@ -43,5 +49,7 @@
             // scrubbing the html
             return $sce.trustAsHtml(html);
         }
+
+
     }
 })();

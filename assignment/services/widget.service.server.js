@@ -59,7 +59,7 @@ function uploadImage(req, res) {
 
     // widget = findWidgetById(widgetId);
     widget.url = '/assignment/uploads/'+filename;
-    widget.name = originalname;
+    //widget.name = originalname;
     var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
 
     res.redirect(callbackUrl);
@@ -70,17 +70,29 @@ app.get ("/api/assignment/widget/:widgetId", findWidgetById);
 app.put ("/api/assignment/widget/:widgetId", updateWidget);
 app.delete ("/api/assignment/widget/:widgetId", deleteWidget);
 app.get("/api/assignment/page/:pageId/widget", findAllWidgetsForPage);
-// app.put("/api/assignment/page/:pageId/widget?initial=index1&final=index2", sortWidget);
+app.put("/api/assignment/page/:pageId/widget", sortWidget);
 
-// function sortWidget(req, res) {
-//     var pageId = req.params.pageId;
-//     var index1 = req.query.index1;
-//     var index2 = req.query.index2;
-//     var initial = getIndexOf(pid,index1);
-//     var final = getIndexOf(pid,index2);
-//     widgets.splice(final, 0, widgets.splice(initial, 1)[0]);
-//     res.send(200);
-// }
+
+function sortWidget (req, res) {
+    var initial = req.body['initial'];
+    var final = req.body['final'];
+
+    var result = [];
+    var pageId = req.params['pageId'];
+    for (var w in widgets) {
+        if (widgets[w].pageId === pageId) {
+            result.push(w);
+        }
+    }
+
+    var originalIndex = result[initial];
+    var newIndex = result[final];
+
+    widgets.splice(originalIndex, 1);
+    widgets.splice(newIndex, 0, widgets[originalIndex]);
+
+    res.sendStatus(200)
+}
 
 function findAllWidgetsForPage(req, res) {
     var results = [];

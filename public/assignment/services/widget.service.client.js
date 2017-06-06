@@ -9,18 +9,18 @@
             findWidgetById: findWidgetById,
             deleteWidget: deleteWidget,
             createWidget: createWidget,
-            updateWidget: updateWidget
-            //sortWidget: sortWidget
+            updateWidget: updateWidget,
+            sortWidget: sortWidget
         };
         return api;
 
-        // function sortWidget(pageId, index1, index2){
-        //     var url = "/api/assignment/page/" + pageId + "/widget/?intial=" + index1 +"&final=" + index2;
-        //     $http.put(url)
-        //         .then(function (response) {
-        //             return response.data;
-        //         });
-        // }
+        function sortWidget(pageId, data){
+            var url = "/api/assignment/page/" + pageId + "/widget";
+            $http.put(url, data)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function createWidget(pageId, widget) {
             //widget.pageId = pageId;
