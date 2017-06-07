@@ -18,24 +18,6 @@
 </head>
 <body>
     <h1>Project Home Page</h1>
-    <!--<label for="jobname">Job Name</label>-->
-    <!--<input class="jobname"-->
-           <!--id="jobname"-->
-           <!--type="text"-->
-           <!--value=""-->
-           <!--name="jobname">-->
-
-    <!--<label for="location">Location</label>-->
-    <!--<input class="location"-->
-           <!--id="location"-->
-           <!--type="text"-->
-           <!--value=""-->
-           <!--name="location">-->
-
-    <!--<input type="submit"-->
-           <!--id="searchResult"-->
-           <!--value="Find Jobs"-->
-           <!--class="">-->
 
     <!--<style type='text/css'> -->
         <!--#indJobContent { -->
@@ -233,34 +215,34 @@
         <div id='indJobContent'
              class="">
         </div>
-        <!--<div class='indeed_search_wrapper'>-->
-            <!--<form onsubmit='clearDefaults(1);runSearch(1);return false;'-->
-                  <!--method='get'-->
-                  <!--class='indeed_jobform'-->
-                  <!--target="_new">-->
-                <!--<div class="qc">-->
-                    <!--<label>What:</label>-->
-                    <!--<input type='text'-->
-                           <!--onfocus='this.value=""'-->
-                           <!--value='title, keywords'-->
-                           <!--name='q'-->
-                           <!--class='q'>-->
-                <!--</div>-->
-                <!--<div class="lc">-->
-                    <!--<label>Where:</label>-->
-                    <!--<input type='text'-->
-                           <!--onfocus='this.value=""'-->
-                           <!--value='city, state, or zip'-->
-                           <!--name='l'-->
-                           <!--class='l'>-->
-                <!--</div>-->
-                <!--<div style='float:left'>-->
-                    <!--<input type='submit'-->
-                           <!--value='Find Jobs'-->
-                           <!--class='findjobs'>-->
-                <!--</div>-->
-            <!--</form>-->
-        <!--</div>-->
+        <div class='indeed_search_wrapper'>
+            <form onsubmit='clearDefaults(1);runSearch(1);return false;'
+                  method='get'
+                  class='indeed_jobform'
+                  target="_new">
+                <div class="qc">
+                    <label>What:</label>
+                    <input type='text'
+                           onfocus='this.value=""'
+                           value='title, keywords'
+                           name='q'
+                           class='q'>
+                </div>
+                <div class="lc">
+                    <label>Where:</label>
+                    <input type='text'
+                           onfocus='this.value=""'
+                           value='city, state, or zip'
+                           name='l'
+                           class='l'>
+                </div>
+                <div style='float:left'>
+                    <input type='submit'
+                           value='Find Jobs'
+                           class='findjobs'>
+                </div>
+            </form>
+        </div>
         <br/>
         <div id='indeed_link'>
             <a title="Job Search"
@@ -277,10 +259,6 @@
         <script type='text/javascript'>setDefaultSearches();</script>
     </div>
     </div>
-
-
-
-
 
     <script type='text/javascript'
             src='https://www.indeed.com/ads/jobroll-widget-v3.js'
