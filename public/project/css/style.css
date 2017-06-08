@@ -1,0 +1,20 @@
+.line {
+    font-size: medium;
+}
+
+.company-detail {
+    display: inline-block;
+}
+
+.date {
+    text-align: right;
+    color: #8c8c8c;
+}
+
+.snippet {
+
+}
+
+.indeedlink {
+    text-align: right;
+}
