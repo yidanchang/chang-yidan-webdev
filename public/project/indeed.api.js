@@ -53,9 +53,11 @@
                     //console.log(data.results);
                     model.jobs = data.results;
                     $scope.$apply();
+                    console.log(url);
                 },
                 error: function (data, status, error) {
                     console.log('error', data, status, error);
+                    console.log(url);
                 }
             });
 
