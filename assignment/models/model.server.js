@@ -1,14 +1,15 @@
+module.exports = function (app, mongoose) {
+    mongoose.Promise = require('q').Promise
 
-module.exports = function() {
-    var userModel = require("./user/user.model.server.js")();
-    var websiteModel = require("./website/website.model.server.js")();
-    var pageModel = require("./page/page.model.server.js")();
-    var widgetModel = require("./widget/widget.model.server.js")();
+    require('./user/user.schema.server.js')(mongoose);
+    require('./user/user.model.server.js')(mongoose);
 
-    return {
-        userModel: userModel,
-        websiteModel: websiteModel,
-        pageModel: pageModel,
-        widgetModel: widgetModel
-    };
+    require('./website/website.schema.server.js')(mongoose);
+    require('./website/website.model.server.js')(mongoose);
+
+    require('./page/page.schema.server.js')(mongoose);
+    require('./page/page.model.server.js')(mongoose);
+    
+    require('./widget/widget.schema.server.js')(mongoose);
+    require('./widget/widget.model.server.js')(mongoose);
 };
