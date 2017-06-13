@@ -2,28 +2,15 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('AssignmentUserModel', userSchema);
 
-var api = {
-    createUser : createUser,
-    findUserById : findUserById,
-    findAllUsers : findAllUsers,
-    findUserByUsername : findUserByUsername,
-    findUserByCredentials : findUserByCredentials,
-    updateUser : updateUser,
-    deleteUser : deleteUser,
-    addWebsiteToUser : addWebsiteToUser,
-    deleteWebsiteFromUser : deleteWebsiteFromUser
-};
-return api;
-
-// userModel.createUser = createUser;
-// userModel.findUserById = findUserById;
-// userModel.findAllUsers = findAllUsers;
-// userModel.findUserByUsername = findUserByUsername;
-// userModel.findUserByCredentials = findUserByCredentials;
-// userModel.updateUser = updateUser;
-// userModel.deleteUser = deleteUser;
-// userModel.addWebsiteToUser = addWebsiteToUser;
-// userModel.deleteWebsiteFromUser = deleteWebsiteFromUser;
+userModel.createUser = createUser;
+userModel.findUserById = findUserById;
+userModel.findAllUsers = findAllUsers;
+userModel.findUserByUsername = findUserByUsername;
+userModel.findUserByCredentials = findUserByCredentials;
+userModel.updateUser = updateUser;
+userModel.deleteUser = deleteUser;
+userModel.addWebsiteToUser = addWebsiteToUser;
+userModel.deleteWebsiteFromUser = deleteWebsiteFromUser;
 
 module.exports = userModel;
 

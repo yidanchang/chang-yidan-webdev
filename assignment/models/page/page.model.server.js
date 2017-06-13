@@ -5,28 +5,17 @@ var websiteModel = require('../website/website.model.server');
 
 // api
 // websiteModel.findAllWebsites = findAllWebsites;
-var api = {
-    createPage : createPage,
-    findAllPagesForWebsite : findAllPagesForWebsite,
-    updatePage : updatePage,
-    findPageById : findPageById,
-    deletePagesFromWebsite : deletePagesFromWebsite,
-    deleteWidgetsFromPage : deleteWidgetsFromPage,
-    addWidgetToPage : addWidgetToPage,
-    reorderWidget : reorderWidget
-};
 
-return api;
-// pageModel.createPage = createPage;
-// pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
-// // pageModel.deletePage = deletePage;
-// pageModel.updatePage = updatePage;
-// // pageModel.deletePage = deletePage;
-// pageModel.findPageById = findPageById;
-// pageModel.deletePagesFromWebsite = deletePagesFromWebsite;
-// pageModel.deleteWidgetsFromPage = deleteWidgetsFromPage;
-// pageModel.addWidgetToPage = addWidgetToPage;
-// pageModel.reorderWidget = reorderWidget;
+pageModel.createPage = createPage;
+pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
+// pageModel.deletePage = deletePage;
+pageModel.updatePage = updatePage;
+// pageModel.deletePage = deletePage;
+pageModel.findPageById = findPageById;
+pageModel.deletePagesFromWebsite = deletePagesFromWebsite;
+pageModel.deleteWidgetsFromPage = deleteWidgetsFromPage;
+pageModel.addWidgetToPage = addWidgetToPage;
+pageModel.reorderWidget = reorderWidget;
 
 module.exports = pageModel;
 
