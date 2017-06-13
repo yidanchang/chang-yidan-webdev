@@ -32,10 +32,10 @@
                 pageId: model.pageId
             };
             // For default heading text and size
-            if (widgetType === 'HEADING') {
-                newWidget.text = "GIZMODO";
-                newWidget.size = 1;
-            }
+            // if (widgetType === 'HEADING') {
+            //     newWidget.text = "GIZMODO";
+            //     newWidget.size = 1;
+            // }
             if (widgetType === 'YOUTUBE') {
                 newWidget.url = "";
             }

@@ -34,11 +34,11 @@
             model.page2 = page;
         }
 
-        function deletePage(pageId) {
+        function deletePage(websiteId, pageId) {
             pageService
-                .deletePage(pageId)
+                .deletePage(websiteId, pageId)
                 .then(function () {
-                    $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page');
+                    $location.url('/user/' + model.userId +'/website/' + websiteId + '/page');
                 })
         }
 

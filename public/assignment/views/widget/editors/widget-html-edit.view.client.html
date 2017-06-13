@@ -8,12 +8,16 @@
            id="name"/>
 
     <label for="text">HTML Text</label>
-    <input ng-model="model.widget.text"
-           class="form-control"
-           placeholder="<p>Lorem ipsum</p>"
-           id="text"/>
+    <div ng-model="model.widget.text"
+         id="text"
+         text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                      ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                      ['indent','outdent'],['html']]">
+    </div>
 
-    <a ng-click="model.deleteWidget(model.widgetId)"
+
+    <a ng-click="model.deleteWidget(model.pageId, model.widgetId)"
        class="btn btn-block btn-danger">
         Delete
     </a>

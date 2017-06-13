@@ -35,11 +35,11 @@
             model.widget = widget;
         }
 
-        function deleteWidget(widgetId) {
+        function deleteWidget(pageId, widgetId) {
             widgetService
-                .deleteWidget(widgetId)
+                .deleteWidget(pageId, widgetId)
                 .then(function () {
-                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + model.pageId + '/widget');
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId + '/page/' + pageId + '/widget');
                 })
         }
 

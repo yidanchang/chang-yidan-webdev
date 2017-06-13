@@ -66,13 +66,15 @@ img {
 
 
 .wd-widget .videocontainer {
-    position: relative;
-    padding-bottom: 56.25%;
+position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
     height: 0;
 }
 
 .videocontainer iframe {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
 }
@@ -88,4 +90,8 @@ nav.navbar.navbar-default {
 
 .btn {
     margin-top: 10px !important;
+}
+
+.input-group-btn .btn-default{
+    display: inherit;
 }

@@ -14,23 +14,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //     next();
 // });
 
-app.get('/project/index.html', function (req, res) {
-    console.log('writing header')
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.sendFile(__dirname + '/public/project/index.html')
-    // res.end('')
-})
+// app.get('/project/index.html', function (req, res) {
+//     console.log('writing header');
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.sendFile(__dirname + '/public/project/index.html')
+//     // res.end('')
+// });
 
 // configure a public directory to host static content
 app.use(app.express.static(__dirname + '/public'));
 
-
-
-require ("./test/app.js")(app);
+// require ("./test/app.js")(app);
 
 require('./assignment/app');
+
+// require('./public/project/indeed.service.server');
 
 var port = process.env.PORT || 3000;
 

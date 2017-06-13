@@ -23,7 +23,7 @@
         }
 
         function createWidget(pageId, widget) {
-            //widget.pageId = pageId;
+            widget.pageId = pageId;
             var url = "/api/assignment/page/" + pageId + "/widget";
             return $http.post(url, widget)
                 .then(function (response) {
@@ -47,8 +47,10 @@
                 });
         }
 
-        function deleteWidget(widgetId) {
-            var url = "/api/assignment/widget/" + widgetId;
+        function deleteWidget(pageId, widgetId) {
+            // var widget = findWidgetById(widgetId);
+            // var pageId = widget.pageId;
+            var url = "/api/assignment/page/" + pageId + "/widget/" + widgetId;
             return $http.delete(url)
                 .then(function (response) {
                     return response.data;

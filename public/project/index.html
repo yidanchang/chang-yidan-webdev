@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="JobApp">
 <head>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <meta charset="UTF-8">
 
     <link href="../assignment/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,17 +13,17 @@
     <link href="css/style.css" rel="stylesheet"/>
 
     <!--<script src="app.js"></script>-->
-    <script src="app.js"></script>
+    <script src="indeed.api.js"></script>
     <script type="text/javascript"
             src="https://gdc.indeed.com/ads/apiresults.js"></script>
 
     <title>Project Home Page</title>
 </head>
 <body>
-    <h1>Project Home Page</h1>
 
     <div class="container-fluid"
          ng-controller="indeedController as model">
+        <!--{{model.jobs}}-->
 
         <h1>Indeed Search</h1>
         <div class="form-group">
@@ -60,7 +60,6 @@
                         ng-click="model.searchJobs(model.title, model.location, model.country)">
                     Find Jobs
                 </button>
-
                 <h2>Search Results</h2>
                 <ul class="list-group">
                     <li ng-click="model.searchJobDetails(job.jobkey)"
