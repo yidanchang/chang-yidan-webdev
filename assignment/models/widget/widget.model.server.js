@@ -2,18 +2,24 @@ var mongoose = require('mongoose');
 var widgetSchema = require('./widget.schema.server');
 var widgetModel = mongoose.model('AssignmentWidgetModel', widgetSchema);
 var pageModel = require('../page/page.model.server');
-var websiteModel = require('../website/website.model.server');
-var userModel = require('../user/user.model.server');
 
 // api
-widgetModel.createWidget = createWidget;
-widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
-// widgetModel.deletewidget = deletewidget;
-widgetModel.updateWidget = updateWidget;
-// widgetModel.deletewidget = deletewidget;
-widgetModel.findWidgetById = findWidgetById;
-widgetModel.deleteWidgetsFromPage = deleteWidgetsFromPage;
-widgetModel.reorderWidget = reorderWidget;
+var api = {
+    createWidget : createWidget,
+    findAllWidgetsForPage : findAllWidgetsForPage,
+    updateWidget : updateWidget,
+    findWidgetById : findWidgetById,
+    deleteWidgetsFromPage : deleteWidgetsFromPage,
+    reorderWidget : reorderWidget
+};
+return api;
+
+// widgetModel.createWidget = createWidget;
+// widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
+// widgetModel.updateWidget = updateWidget;
+// widgetModel.findWidgetById = findWidgetById;
+// widgetModel.deleteWidgetsFromPage = deleteWidgetsFromPage;
+// widgetModel.reorderWidget = reorderWidget;
 
 module.exports = widgetModel;
 

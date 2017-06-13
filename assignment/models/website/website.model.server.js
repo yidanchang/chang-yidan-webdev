@@ -5,14 +5,24 @@ var userModel = require('../user/user.model.server');
 
 // api
 // websiteModel.findAllWebsites = findAllWebsites;
-websiteModel.createWebsiteForUser = createWebsiteForUser;
-websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
-websiteModel.deleteWebsiteFromUser = deleteWebsiteFromUser;
-websiteModel.updateWebsite = updateWebsite;
-// websiteModel.deleteWebsite = deleteWebsite;
-websiteModel.findWebsiteById = findWebsiteById;
-websiteModel.addPageToWebsite = addPageToWebsite;
-websiteModel.deletePagesFromWebsite = deletePagesFromWebsite;
+var api = {
+    createWebsiteForUser : createWebsiteForUser,
+    findAllWebsitesForUser : findAllWebsitesForUser,
+    deleteWebsiteFromUser : deleteWebsiteFromUser,
+    updateWebsite : updateWebsite,
+    findWebsiteById : findWebsiteById,
+    addPageToWebsite : addPageToWebsite,
+    deletePagesFromWebsite : deletePagesFromWebsite
+};
+return api;
+// websiteModel.createWebsiteForUser = createWebsiteForUser;
+// websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
+// websiteModel.deleteWebsiteFromUser = deleteWebsiteFromUser;
+// websiteModel.updateWebsite = updateWebsite;
+// // websiteModel.deleteWebsite = deleteWebsite;
+// websiteModel.findWebsiteById = findWebsiteById;
+// websiteModel.addPageToWebsite = addPageToWebsite;
+// websiteModel.deletePagesFromWebsite = deletePagesFromWebsite;
 
 module.exports = websiteModel;
 

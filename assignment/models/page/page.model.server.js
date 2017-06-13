@@ -2,20 +2,31 @@ var mongoose = require('mongoose');
 var pageSchema = require('./page.schema.server');
 var pageModel = mongoose.model('AssignmentPageModel', pageSchema);
 var websiteModel = require('../website/website.model.server');
-var userModel = require('../user/user.model.server');
 
 // api
 // websiteModel.findAllWebsites = findAllWebsites;
-pageModel.createPage = createPage;
-pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
-// pageModel.deletePage = deletePage;
-pageModel.updatePage = updatePage;
-// pageModel.deletePage = deletePage;
-pageModel.findPageById = findPageById;
-pageModel.deletePagesFromWebsite = deletePagesFromWebsite;
-pageModel.deleteWidgetsFromPage = deleteWidgetsFromPage;
-pageModel.addWidgetToPage = addWidgetToPage;
-pageModel.reorderWidget = reorderWidget;
+var api = {
+    createPage : createPage,
+    findAllPagesForWebsite : findAllPagesForWebsite,
+    updatePage : updatePage,
+    findPageById : findPageById,
+    deletePagesFromWebsite : deletePagesFromWebsite,
+    deleteWidgetsFromPage : deleteWidgetsFromPage,
+    addWidgetToPage : addWidgetToPage,
+    reorderWidget : reorderWidget
+};
+
+return api;
+// pageModel.createPage = createPage;
+// pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
+// // pageModel.deletePage = deletePage;
+// pageModel.updatePage = updatePage;
+// // pageModel.deletePage = deletePage;
+// pageModel.findPageById = findPageById;
+// pageModel.deletePagesFromWebsite = deletePagesFromWebsite;
+// pageModel.deleteWidgetsFromPage = deleteWidgetsFromPage;
+// pageModel.addWidgetToPage = addWidgetToPage;
+// pageModel.reorderWidget = reorderWidget;
 
 module.exports = pageModel;
 
