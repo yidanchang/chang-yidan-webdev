@@ -9,7 +9,7 @@ module.exports = function (app, mongoose) {
 
     require('./page/page.schema.server.js')(mongoose);
     require('./page/page.model.server.js')(mongoose);
-    
+
     require('./widget/widget.schema.server.js')(mongoose);
     require('./widget/widget.model.server.js')(mongoose);
 };
