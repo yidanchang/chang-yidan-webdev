@@ -41,7 +41,7 @@
             if (typeof country === 'undefined') {
                 country = "";
             }
-            var url = "https://api.indeed.com/ads/apisearch?format=json&publisher=9954334827924258&v=2&q=" + title + "&l=" + location + "&co=" + country;
+            var url = "http://api.indeed.com/ads/apisearch?format=json&publisher=9954334827924258&v=2&q=" + title + "&l=" + location + "&co=" + country;
 
             $.ajax({
                 url: url,
@@ -77,7 +77,7 @@
         // }
 
         function searchJobDetails(jobID) {
-            var url = "https://api.indeed.com/ads/apigetjobs?publisher=9954334827924258&format=json&v=2&jobkeys=" + jobID;
+            var url = "http://api.indeed.com/ads/apigetjobs?publisher=9954334827924258&format=json&v=2&jobkeys=" + jobID;
             $.ajax({
                 url: url,
                 type: "GET",
