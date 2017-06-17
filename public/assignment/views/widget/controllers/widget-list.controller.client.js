@@ -5,11 +5,13 @@
 
     function widgetListController($routeParams,
                                   widgetService,
+                                  currentUser,
                                   $sce,
                                   $scope) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        // model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
@@ -29,8 +31,9 @@
         }
 
         $scope.$on('fromTo', function(event, data) {
+            data.pageId = model.pageId;
             widgetService
-                .sortWidget(data.pageId, data);
+                .sortWidget(model.pageId, data);
         });
 
         function widgetUrl(widget) {

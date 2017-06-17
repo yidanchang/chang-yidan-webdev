@@ -5,10 +5,11 @@
 
     function websiteNewController($routeParams,
                                   $location,
+                                  currentUser,
                                   websiteService) {
         var model = this;
-
-        model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
+        // model.userId = $routeParams['userId'];
         model.createWebsite = createWebsite;
 
 
@@ -25,14 +26,18 @@
         }
 
         function createWebsite(website) {
-            if (typeof website === 'undefined') {
-                model.error = "Fail to create! Both 'Name' and 'Description' cannot be empty";
+            if(typeof website === 'undefined' || website.name === null || website.name === '' || typeof website.name === 'undefined') {
+                model.error = 'Website name is required';
+                return;
             }
+            // if (typeof website === 'undefined') {
+            //     model.error = "Fail to create! 'Name' and 'Description' cannot be empty";
+            // }
 
             websiteService
                 .createWebsite(model.userId, website)
                 .then(function () {
-                    $location.url("/user/" + model.userId + "/website");
+                    $location.url("/website");
                 })
 
             // if (typeof website === 'undefined') {

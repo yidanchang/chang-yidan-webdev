@@ -51,18 +51,25 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    for(var w in widgets) {
-        if (widgets[w]._id === widgetId) {
-            var widget = widgets[w];
-        }
-    }
+    widgetModel
+        .findWidgetById(widgetId)
+        .then (function (widget) {
+            widget.url = '/assignment/uploads/' + filename;
+            var callbackUrl = "/assignment/#!/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+            res.redirect(callbackUrl);
+            return widgetModel
+                .updateWidget(widgetId, widget);
+        })
+        .then(function (status) {
+            res.sendStatus(200)
+        });
 
     // widget = findWidgetById(widgetId);
-    widget.url = '/assignment/uploads/'+filename;
-    //widget.name = originalname;
-    var callbackUrl   = "/assignment/#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
-
-    res.redirect(callbackUrl);
+    // widget.url = '/assignment/uploads/'+filename;
+    // //widget.name = originalname;
+    // var callbackUrl   = "/assignment/#!/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
+    //
+    // res.redirect(callbackUrl);
 }
 
 app.post("/api/assignment/page/:pageId/widget", createWidget);

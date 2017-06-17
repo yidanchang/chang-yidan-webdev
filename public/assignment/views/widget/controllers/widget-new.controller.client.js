@@ -5,10 +5,12 @@
 
     function widgetNewController($routeParams,
                                  $location,
+                                 currentUser,
                                  widgetService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        // model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams.pageId;
         model.createWidget = createWidget;
@@ -42,7 +44,7 @@
             widgetService
                 .createWidget(model.pageId, newWidget)
                 .then(function (widget) {
-                    $location.url('/user/' + model.userId +'/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id);
+                    $location.url('/website/' + model.websiteId + '/page/' + model.pageId + '/widget/' + widget._id);
                 })
         }
     }

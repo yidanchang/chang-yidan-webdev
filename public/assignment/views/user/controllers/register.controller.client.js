@@ -12,15 +12,22 @@
         function register(username, password, password2) {
 
             if(username === null || username === '' || typeof username === 'undefined') {
-                model.error = 'username is required';
+                model.error = 'Username is required';
                 return;
             }
 
+            if(password === null || password === '' || typeof password === 'undefined') {
+                model.error = "Password is required";
+                return;
+            }
+            if(password2 === null || password2 === '' || typeof password2 === 'undefined') {
+                model.error = "Verify Password field is required";
+                return;
+            }
             if(password !== password2 || password === null || typeof password === 'undefined') {
-                model.error = "passwords must match";
+                model.error = "Password and Verify Password must match";
                 return;
             }
-
             userService
                 .findUserByUsername(username)
                 .then(
@@ -33,12 +40,11 @@
                             password: password
                         };
                         return userService
-                            .createUser(newUser);
-                    }
-                )
-                .then(function (user) {
-                    $location.url('/user/' + user._id);
-                });
+                            .register(newUser)
+                            .then(function (user) {
+                                $location.url('/profile');
+                            })
+                    });
 
             // var found = userService.findUserByUsername(username);
             //

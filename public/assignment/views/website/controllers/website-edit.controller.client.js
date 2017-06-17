@@ -5,10 +5,12 @@
 
     function websiteEditController($routeParams,
                                    $location,
+                                   currentUser,
                                    websiteService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
+        // model.userId = $routeParams['userId'];
+        model.userId = currentUser._id;
         model.websiteId = $routeParams.websiteId;
         model.deleteWebsite = deleteWebsite;
         model.updateWebsite = updateWebsite;
@@ -38,7 +40,7 @@
             websiteService
                 .deleteWebsite(userId, websiteId)
                 .then(function () {
-                    $location.url('/user/' + userId + '/website');
+                    $location.url('/website');
                 })
         }
 
@@ -49,10 +51,14 @@
             //     developerId: model.website.developerId,
             //     description: model.website.description
             // };
+            if(typeof website === 'undefined' || website.name === null || website.name === '' || typeof website.name === 'undefined') {
+                model.error = 'Website name is required';
+                return;
+            }
             websiteService
                 .updateWebsite(websiteId, website)
                 .then(function () {
-                    $location.url('/user/' + model.userId + '/website');
+                    $location.url('/website');
                 })
         }
     }
