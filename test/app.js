@@ -1,4 +1,4 @@
-module.exports = function(app)
+module.exports = function(app, mongoose)
 {
     app.get("/api/test", findAllMessages);
     app.post("/api/test", createMessage);
@@ -14,17 +14,17 @@ module.exports = function(app)
     //         process.env.MLAB_APP_NAME;
     // }
 
-    var connectionString = 'mongodb://127.0.0.1:27017/test'; // for local
-    if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
-        var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
-        var password = process.env.MLAB_PASSWORD_WEBDEV;
-        connectionString = 'mongodb://' + username + ':' + password;
-        connectionString += '@ds031601.mlab.com:31601/heroku_lk22crx9'; // user yours
-    }
+    // var connectionString = 'mongodb://127.0.0.1:27017/test'; // for local
+    // if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
+    //     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
+    //     var password = process.env.MLAB_PASSWORD_WEBDEV;
+    //     connectionString = 'mongodb://' + username + ':' + password;
+    //     connectionString += '@ds031601.mlab.com:31601/heroku_lk22crx9'; // user yours
+    // }
 
-    var mongoose = require("mongoose");
-    mongoose.connect(connectionString);
-    mongoose.Promise = require('q').Promise;
+    // var mongoose = require("mongoose");
+    // mongoose.connect(connectionString);
+    // mongoose.Promise = require('q').Promise;
 
     var TestSchema = mongoose.Schema({
         message: String

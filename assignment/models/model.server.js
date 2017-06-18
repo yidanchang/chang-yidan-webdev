@@ -1,5 +1,5 @@
 module.exports = function (app, mongoose) {
-    mongoose.Promise = require('q').Promise
+    mongoose.Promise = require('q').Promise;
 
     require('./user/user.schema.server.js')(mongoose);
     require('./user/user.model.server.js')(mongoose);

@@ -110,7 +110,7 @@
                 resolve: {
                     currentUser: checkLoggedIn
                 }
-            })
+        })
     }
 
 
