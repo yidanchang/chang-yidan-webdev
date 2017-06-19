@@ -25,8 +25,8 @@
 
 module.exports = function (app, mongoose) {
     require("./models/model.server.js")(app, mongoose);
-    require('./services/user.service.server.js')(app);
-    require('./services/website.service.server.js')(app);
-    require("./services/page.service.server.js")(app);
-    require("./services/widget.service.server.js")(app);
+    // require('./services/user.service.server.js')(app);
+    // require('./services/website.service.server.js')(app);
+    // require("./services/page.service.server.js")(app);
+    // require("./services/widget.service.server.js")(app);
 };

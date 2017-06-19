@@ -31,6 +31,14 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/search', {
+                templateUrl: 'views/search/templates/indeed-search.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
             .when('/website', {
                 templateUrl: 'views/website/templates/website-list.view.client.html',
                 controller: 'websiteListController',
