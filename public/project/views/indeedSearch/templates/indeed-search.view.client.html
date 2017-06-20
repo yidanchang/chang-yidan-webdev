@@ -1,0 +1,227 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" ng-app="JobApp">-->
+<!--<head>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script-->
+
+    <!--<meta charset="UTF-8">-->
+
+    <!--<link href="../../assignment/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--&lt;!&ndash;<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>&ndash;&gt;-->
+    <!--<script src="../../vendor/angular/angular.min.js"></script>-->
+    <!--&lt;!&ndash;<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js"></script>&ndash;&gt;-->
+
+    <!--<link href="css/indeedSearch.css" rel="stylesheet"/>-->
+
+    <!--&lt;!&ndash;<script src="app.js"></script>&ndash;&gt;-->
+    <!--<script src="indeed.api.js"></script>-->
+    <!--<script type="text/javascript"-->
+            <!--src="http://gdc.indeed.com/ads/apiresults.js"></script>-->
+
+    <!--<title>Project Home Page</title>-->
+<!--</head>-->
+<!--<body>-->
+
+    <div class="container-fluid"
+         ng-controller="indeedController as model">
+        <!--{{model.jobs}}-->
+
+        <h1>Indeed Search</h1>
+        <div class="form-group">
+            <div class="col-xs-6">
+                <label for="what">What</label>
+                <input ng-model="model.title"
+                       type="text"
+                       class="form-control"
+                       id="what"
+                       placeholder="Java">
+                <label for="location">Location</label>
+                <input ng-model="model.location"
+                       type="text"
+                       class="form-control"
+                       id="location"
+                       placeholder="Boston">
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <select ng-model="model.country"
+                            id="country"
+                            class="form-control"
+                            ng-value="us">
+                        <option value="us">United States</option>
+                        <option value="cn">China</option>
+                        <option value="gb">United Kingdom</option>
+                        <option value="at">Austria</option>
+                        <option value="fr">France</option>
+                        <option value="it">Italy</option>
+                        <option value="ru">Russia</option>
+                        <option value="es">Spain</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-block"
+                        ng-click="model.searchJobs(model.title, model.location, model.country)">
+                    Find Jobs
+                </button>
+                <h2>Search Results</h2>
+                <ul class="list-group">
+                    <li ng-click="model.searchJobDetails(job.jobkey)"
+                        ng-repeat="job in model.jobs"
+                        class="list-group-item">
+                        <div class="line"><b>Job Position: </b>{{job.jobtitle}}</div>
+                        <div class="line"><b>Company: </b>{{job.company}}</div>
+                        <div class="line"><b>Location: </b>{{job.formattedLocation}}</div>
+                        <div class="line"><b>Post: </b>{{job.formattedRelativeTime}}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="col-xs-6">
+            <h2>Job Details</h2>
+            <h3>{{model.job.jobtitle}}</h3>
+            <div class="company-detail"><i>{{model.job.company}}</i>{{model.job.formattedLocationFull}}</div>
+            <div class="date">{{model.job.date}}</div>
+            <div class="snippet"><p>{{model.job.snippet}}</p></div>
+            <p>If you want to get more details, click <a href="{{model.job.url}}">{{model.job.url}}</a></p>
+            <div class="indeedlink">
+                <span id="indeed_at">
+                    <a title="Job Search"
+                       href="https://www.indeed.com"
+                       rel="nofollow">jobs by <img alt=Indeed
+                                                   src="https://www.indeed.com/p/jobsearch.gif"
+                                                   style="border: 0;
+                                                   vertical-align: middle;">
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!--&lt;!&ndash;<h2>Search Results</h2>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<ul class="list-group">&ndash;&gt;-->
+            <!--&lt;!&ndash;<li ng-click="model.searchDetails(movie.imdbID)"&ndash;&gt;-->
+                <!--&lt;!&ndash;ng-repeat="movie in model.movies"&ndash;&gt;-->
+                <!--&lt;!&ndash;class="list-group-item">&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<img ng-src="{{movie.Poster}}" width="50px"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;{{movie.Title}}&ndash;&gt;-->
+                <!--&lt;!&ndash;{{movie.imbdID}}&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="col-xs-6">&ndash;&gt;-->
+        <!--&lt;!&ndash;<h2>Details</h2>&ndash;&gt;-->
+        <!--&lt;!&ndash;<h3>{{model.movie.title}}</h3>&ndash;&gt;-->
+        <!--&lt;!&ndash;<img ng-src="{{model.movie.Poster}}" width="200px"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<h3>{{model.movie.Director}}</h3>&ndash;&gt;-->
+        <!--&lt;!&ndash;<p>{{model.movie.Plot}}</p>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<ul>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<li ng-repeat="actor in model.movie.Actors.split(',')">&ndash;&gt;-->
+                <!--&lt;!&ndash;{{actor}}&ndash;&gt;-->
+            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--&lt;!&ndash;{{model.movie.Actors}}&ndash;&gt;-->
+        <!--&lt;!&ndash;<hr/>&ndash;&gt;-->
+        <!--&lt;!&ndash;{{model.movie}}&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+
+
+    <!--&lt;!&ndash;<div class="container-fluid">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div id='indeed_widget_wrapper'&ndash;&gt;-->
+         <!--&lt;!&ndash;style=''>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div id='indeed_widget_header'>&ndash;&gt;-->
+            <!--&lt;!&ndash;Search Jobs from Indeed&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class='indeed_search_wrapper'>&ndash;&gt;-->
+            <!--&lt;!&ndash;<form onsubmit='clearDefaults(0);runSearch(0);return false;'&ndash;&gt;-->
+                  <!--&lt;!&ndash;method='get'&ndash;&gt;-->
+                  <!--&lt;!&ndash;class='indeed_jobform'&ndash;&gt;-->
+                  <!--&lt;!&ndash;target="_new">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="qc">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label>What:</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type='text'&ndash;&gt;-->
+                           <!--&lt;!&ndash;onfocus='this.value=""'&ndash;&gt;-->
+                           <!--&lt;!&ndash;value='title, keywords'&ndash;&gt;-->
+                           <!--&lt;!&ndash;name='q'&ndash;&gt;-->
+                           <!--&lt;!&ndash;class='q'>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="lc">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label>Where:</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type='text'&ndash;&gt;-->
+                           <!--&lt;!&ndash;onfocus='this.value=""'&ndash;&gt;-->
+                           <!--&lt;!&ndash;value='city, state, or zip'&ndash;&gt;-->
+                           <!--&lt;!&ndash;name='l'&ndash;&gt;-->
+                           <!--&lt;!&ndash;class='l'>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div style='float:left'>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type='submit'&ndash;&gt;-->
+                           <!--&lt;!&ndash;value='Find Jobs'&ndash;&gt;-->
+                           <!--&lt;!&ndash;class='findjobs'>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<br/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<br/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div id='indJobContent'&ndash;&gt;-->
+             <!--&lt;!&ndash;class="">&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class='indeed_search_wrapper'>&ndash;&gt;-->
+            <!--&lt;!&ndash;<form onsubmit='clearDefaults(1);runSearch(1);return false;'&ndash;&gt;-->
+                  <!--&lt;!&ndash;method='get'&ndash;&gt;-->
+                  <!--&lt;!&ndash;class='indeed_jobform'&ndash;&gt;-->
+                  <!--&lt;!&ndash;target="_new">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="qc">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label>What:</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type='text'&ndash;&gt;-->
+                           <!--&lt;!&ndash;onfocus='this.value=""'&ndash;&gt;-->
+                           <!--&lt;!&ndash;value='title, keywords'&ndash;&gt;-->
+                           <!--&lt;!&ndash;name='q'&ndash;&gt;-->
+                           <!--&lt;!&ndash;class='q'>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="lc">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label>Where:</label>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type='text'&ndash;&gt;-->
+                           <!--&lt;!&ndash;onfocus='this.value=""'&ndash;&gt;-->
+                           <!--&lt;!&ndash;value='city, state, or zip'&ndash;&gt;-->
+                           <!--&lt;!&ndash;name='l'&ndash;&gt;-->
+                           <!--&lt;!&ndash;class='l'>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div style='float:left'>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type='submit'&ndash;&gt;-->
+                           <!--&lt;!&ndash;value='Find Jobs'&ndash;&gt;-->
+                           <!--&lt;!&ndash;class='findjobs'>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<br/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div id='indeed_link'>&ndash;&gt;-->
+            <!--&lt;!&ndash;<a title="Job Search"&ndash;&gt;-->
+               <!--&lt;!&ndash;href="https://www.indeed.com/?indpubnum=9954334827924258"&ndash;&gt;-->
+               <!--&lt;!&ndash;rel="nofollow"&ndash;&gt;-->
+               <!--&lt;!&ndash;target="_new">&ndash;&gt;-->
+                <!--&lt;!&ndash;jobs by&ndash;&gt;-->
+                <!--&lt;!&ndash;<img alt=Indeed&ndash;&gt;-->
+                     <!--&lt;!&ndash;src='https://www.indeed.com/p/jobsearch.gif'&ndash;&gt;-->
+                     <!--&lt;!&ndash;style='border: 0;&ndash;&gt;-->
+                     <!--&lt;!&ndash;vertical-align: bottom;'>&ndash;&gt;-->
+            <!--&lt;!&ndash;</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<script type='text/javascript'>setDefaultSearches();</script>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<script type='text/javascript'&ndash;&gt;-->
+            <!--&lt;!&ndash;src='https://www.indeed.com/ads/jobroll-widget-v3.js'&ndash;&gt;-->
+            <!--&lt;!&ndash;charset='UTF-8'>&ndash;&gt;-->
+    <!--&lt;!&ndash;</script>&ndash;&gt;-->
+
+
+<!--</body>-->
+<!--</html>-->

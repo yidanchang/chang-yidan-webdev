@@ -40,7 +40,7 @@ require ("./assignment/app.js")(app, mongoose);
 
 // require('./assignment/app');
 
-require('./public/project/server/app.js')(app, mongoose);
+require('./project/app.js')(app, mongoose);
 
 // require('./public/project/indeed.service.server');
 
