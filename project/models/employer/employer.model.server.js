@@ -12,12 +12,13 @@ module.exports = function (mongoose) {
     employerModel.deleteUser = deleteUser;
     employerModel.addPostingToUser = addPostingToUser;
     employerModel.deletePostingFromUser = deletePostingFromUser;
-    employerModel.findUserByFacebookId = findUserByFacebookId;
+    employerModel.searchByUsername = searchByUsername;
+
 
     module.exports = employerModel;
 
-    function findUserByFacebookId(facebookId) {
-        return employerModel.findOne({'facebook.id': facebookId});
+    function searchByUsername(keyword) {
+        return employerModel.find({"username": new RegExp(keyword, 'i')});
     }
 
     function deletePostingFromUser(userId, postingId) {

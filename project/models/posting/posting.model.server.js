@@ -18,6 +18,9 @@ module.exports = function (mongoose) {
         return postingModel.find({"job_title": new RegExp(keyword, 'i')});
     }
 
+    function findAllPostingsForUser(userId) {
+        return postingModel.find({_employer: userId});
+    }
     function updatePosting(postingId, posting) {
         return postingModel
             .update({_id: postingId},
@@ -39,11 +42,6 @@ module.exports = function (mongoose) {
                 return employerModel
                     .deletePostingFromUser(userId, postingId);
             });
-    }
-
-    function findAllPostingsForUser(userId) {
-        return postingModel
-            .find({_employer: userId});
     }
 
     function createPostingForUser(userId, posting) {

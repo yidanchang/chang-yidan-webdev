@@ -68,14 +68,14 @@
             //         currentUser: checkLoggedIn
             //     }
             // })
-            // .when('/search/user/:keyword', {
-            //     templateUrl: 'views/user/templates/search.view.client.html',
-            //     controller: 'searchController',
-            //     controllerAs: 'model',
-            //     resolve: {
-            //         currentUser: checkLoggedIn
-            //     }
-            // })
+            .when('/search/user/:keyword', {
+                templateUrl: 'views/search/templates/searchUser.view.client.html',
+                controller: 'searchUserController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
             // .when('/indeedSearch', {
             //     templateUrl: 'views/indeedSearch/templates/indeed-search.view.client.html',
             //     controller: 'indeedController',

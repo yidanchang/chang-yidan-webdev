@@ -19,6 +19,23 @@ module.exports = function (app) {
     app.get('/api/project/loggedin', loggedin);
     app.post('/api/project/logout', logout);
     app.post('/api/project/register', register);
+    app.get('/api/project/search/user/:keyword', searchByUsername);
+
+    function searchByUsername(req,res) {
+        var keyword = req.params['keyword'];
+        employerModel
+            .searchByUsername(keyword)
+            .then(
+                function(result) {
+                    if (result) {
+                        res.json(result);
+                    } else {
+                        res.status(402).send("No matched result in users.");
+                    }
+                }, function (err) {
+                    res.status(404).send(err);
+                });
+    }
 
     function register(req, res) {
         var userObj = req.body;

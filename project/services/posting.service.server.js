@@ -8,7 +8,25 @@ module.exports = function(app, models) {
     app.put("/api/project/posting/:postingId", updatePosting);
     app.delete("/api/project/user/:userId/posting/:postingId", deletePosting);
     app.get('/api/project/search/posting/:keyword', searchJobs);
-    app.get("/api/project/posting/:postingId/details", findPostingById);
+    // app.get("/api/project/posting/:postingId/details", findPostingById);
+
+    function findAllPostingsForUser(req, res) {
+        var userId = req.params.userId;
+        postingModel
+            .findAllPostingsForUser(userId)
+            .then(function (postings) {
+                res.json(postings);
+            })
+        // var results = [];
+        //
+        // for(var v in websites) {
+        //     if(websites[v].developerId === req.params.userId) {
+        //         results.push(websites[v]);
+        //     }
+        // }
+        //
+        // res.json(results);
+    }
 
     function searchJobs(req,res) {
         var keyword = req.params['keyword'];
@@ -37,16 +55,6 @@ module.exports = function(app, models) {
                     res.json(newPosting);
                 }, function(error) {
                     res.send(error);
-                });
-    }
-
-    function findAllPostingsForUser(req, res) {
-        var userId = req.params['userId'];
-        postingModel
-            .findAllPostingsForUser(userId)
-            .then(function(postings) {
-                console.log(postings);
-                    res.json(postings);
                 });
     }
 

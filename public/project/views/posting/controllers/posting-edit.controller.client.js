@@ -37,7 +37,7 @@
 
         function deletePosting(userId, postingId) {
             postingService
-                .deleteWebsite(userId, postingId)
+                .deletePosting(userId, postingId)
                 .then(function () {
                     $location.url('/posting');
                 })

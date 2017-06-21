@@ -14,10 +14,17 @@
             loggedin: loggedin,
             register: register,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            searchByUsername: searchByUsername
         };
         return api;
 
+        function searchByUsername(keyword) {
+            var url = "/api/project/search/user/" + keyword;
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
+        }
         function register(userObj) {
             var url = "/api/project/register";
             return $http.post(url, userObj)
