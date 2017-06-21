@@ -9,7 +9,7 @@ module.exports = function (mongoose) {
         field: String,
         description: String,
         dateCreated: {type: Date, default: Date.now}
-    }, {collection: 'project_posting'});
+    }, {collection: 'project.posting'});
 
     module.exports = postingSchema;
 }

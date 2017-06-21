@@ -1,7 +1,7 @@
 
 (function () {
     angular
-        .module('JobApp', [])
+        .module('JobApp')
         .controller('indeedController', indeedController);
 
     function indeedController($http, $sce, $scope) {

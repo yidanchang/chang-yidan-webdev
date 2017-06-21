@@ -1,54 +1,68 @@
-// // var mongoose = require('mongoose');
-// module.exports = function (mongoose) {
-//
-//     var postingSchema = require('./posting.schema.server');
-//     var posting = mongoose.model('Posting', postingSchema);
-//     var employerModel = require('../employer/employer.model.server');
-//
-//     posting.createPostingForEmployer = createPostingForEmployer;
-//     posting.findAllPostingsForEmployer = findAllPostingsForEmployer;
-//     posting.deletePosting = deletePosting;
-//     posting.updatePosting = updatePosting;
-//     posting.findPostingById = findPostingById;
-//     posting.searchJobs = searchJobs;
-//
-//     module.exports = posting;
-//
-//     function updatePosting(postingId, posting) {
-//         return posting
-//             .update({_id: postingId},
-//                 {$set:
-//                     {
-//                         job_title: posting.job_title,
-//                         location: posting.location,
-//                         field: posting.field,
-//                         description: posting.description
-//                     }
-//                 });
-//     }
-//
-//     function deletePosting(postingId) {
-//         return posting
-//             .remove({_id: postingId});
-//     }
-//
-//     function findAllPostingsForEmployer(employerId) {
-//         return posting
-//             .find({_employer: employerId});
-//     }
-//
-//     function createPostingForEmployer(employerId, posting) {
-//         posting._employer = employerId;
-//         return posting
-//             .create(posting);
-//     }
-//
-//     function findPostingById(postingId) {
-//         return posting
-//             .findById(postingId);
-//     }
-//
-//     function searchJobs(searchObj) {
-//         return posting.find(searchObj);
-//     }
-// };
+// var mongoose = require('mongoose');
+module.exports = function (mongoose) {
+
+    var postingSchema = require('./posting.schema.server');
+    var postingModel = mongoose.model('Posting', postingSchema);
+    var employerModel = require('../employer/employer.model.server');
+
+    postingModel.createPostingForUser = createPostingForUser;
+    postingModel.findAllPostingsForUser = findAllPostingsForUser;
+    postingModel.deletePosting = deletePosting;
+    postingModel.updatePosting = updatePosting;
+    postingModel.findPostingById = findPostingById;
+    postingModel.searchByName = searchByName;
+
+    module.exports = postingModel;
+
+    function searchByName(keyword) {
+        return postingModel.find({"job_title": new RegExp(keyword, 'i')});
+    }
+
+    function updatePosting(postingId, posting) {
+        return postingModel
+            .update({_id: postingId},
+                {$set:
+                    {
+                        job_title: posting.job_title,
+                        location: posting.location,
+                        company: posting.company,
+                        field: posting.field,
+                        description: posting.description
+                    }
+                });
+    }
+
+    function deletePosting(userId, postingId) {
+        return postingModel
+            .remove({_id: postingId})
+            .then(function (status) {
+                return employerModel
+                    .deletePostingFromUser(userId, postingId);
+            });
+    }
+
+    function findAllPostingsForUser(userId) {
+        return postingModel
+            .find({_employer: userId});
+    }
+
+    function createPostingForUser(userId, posting) {
+        posting._employer = userId;
+        return postingModel
+            .create(posting)
+            .then(function (posting) {
+                employerModel
+                    .addPostingToUser(userId, posting._id);
+                return posting;
+            })
+    }
+
+    function findPostingById(postingId) {
+        return postingModel
+            .findById(postingId);
+    }
+
+    // function searchJobs(searchObj) {
+    //     return postingModel.find(searchObj);
+    // }
+};

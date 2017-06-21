@@ -10,26 +10,6 @@ module.exports = function (app) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-    var FacebookStrategy = require('passport-facebook').Strategy;
-
-    app.get('/auth/facebook',
-        passport.authenticate('facebook',
-            {scope: 'email'}
-        ));
-
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '/project/#!/profile',
-            failureRedirect: '/project/#!/login'
-        }));
-
-    var facebookConfig = {
-        clientID: process.env.FACEBOOK_CLIENT_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: process.env.FACEBOOK_CALLBACK_URL
-    };
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-
     app.post('/api/project/login', passport.authenticate('local'), login);
     app.get('/api/project/user/:userId', findUserById);
     app.get('/api/project/user', findAllUsers);
@@ -266,45 +246,4 @@ module.exports = function (app) {
         }
     }
 
-    function facebookStrategy(token, refreshToken, profile, done) {
-        employerModel
-            .findUserByFacebookId(profile.id)
-            .then(
-                function (user) {
-                    if (user) {
-                        return done(null, user);
-                    } else {
-                        // var email = profile.emails[0].value;
-                        // var emailParts = email.split("@");
-                        var newFacebookUser = {
-                            username: profile.displayName,
-                            // firstName: profile.name.first_name,
-                            // lastName:  profile.name.last_name,
-                            firstName: profile.name.givenName,
-                            lastName: profile.name.familyName,
-                            facebook: {
-                                id: profile.id,
-                                token: token
-                            }
-                        };
-                        return employerModel.createUser(newFacebookUser);
-                    }
-                },
-                function (err) {
-                    if (err) {
-                        return done(err);
-                    }
-                }
-            )
-            .then(
-                function (user) {
-                    return done(null, user);
-                },
-                function (err) {
-                    if (err) {
-                        return done(err);
-                    }
-                }
-            );
-    }
 };

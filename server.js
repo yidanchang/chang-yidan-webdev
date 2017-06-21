@@ -11,7 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-app.use(session({ secret: "this is secret!"}));
+// app.use(session({ secret: "this is secret!"}));
+app.use(session({
+    secret: "this is the secret",
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -33,7 +38,7 @@ var mongoose = require("mongoose");
 mongoose.connect(connectionString);
 
 require ("./test/app.js")(app, mongoose);
-require ("./assignment/app.js")(app, mongoose);
+// require ("./assignment/app.js")(app, mongoose);
 
 
 // require ("./test/app.js")(app);

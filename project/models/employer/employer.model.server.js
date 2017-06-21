@@ -1,7 +1,7 @@
 // var mongoose = require('mongoose');
 module.exports = function (mongoose) {
     var employerSchema = require('./employer.schema.server.js');
-    var employerModel = mongoose.model('EmployerModel', employerSchema);
+    var employerModel = mongoose.model('Employer', employerSchema);
 
     employerModel.createUser = createUser;
     employerModel.findUserById = findUserById;
@@ -10,8 +10,8 @@ module.exports = function (mongoose) {
     employerModel.findUserByCredentials = findUserByCredentials;
     employerModel.updateUser = updateUser;
     employerModel.deleteUser = deleteUser;
-    // employerModel.addPostingToUser = addPostingToUser;
-    // employerModel.deletePostingFromUser = deletePostingFromUser;
+    employerModel.addPostingToUser = addPostingToUser;
+    employerModel.deletePostingFromUser = deletePostingFromUser;
     employerModel.findUserByFacebookId = findUserByFacebookId;
 
     module.exports = employerModel;
@@ -20,25 +20,24 @@ module.exports = function (mongoose) {
         return employerModel.findOne({'facebook.id': facebookId});
     }
 
+    function deletePostingFromUser(userId, postingId) {
+        return employerModel
+            .findById(userId)
+            .then(function (user) {
+                var index = user.postings.indexOf(postingId);
+                user.postings.splice(index, 1);
+                return user.save();
+            });
+    }
 
-    // function deletePostingFromUser(userId, postingId) {
-    //     return employerModel
-    //         .findById(userId)
-    //         .then(function (user) {
-    //             var index = user.postings.indexOf(postingId);
-    //             user.postings.splice(index, 1);
-    //             return user.save();
-    //         });
-    // }
-    //
-    // function addPostingToUser(userId, postingId) {
-    //     return employerModel
-    //         .findById(userId)
-    //         .then(function (user) {
-    //             user.postings.push(postingId);
-    //             return user.save();
-    //         });
-    // }
+    function addPostingToUser(userId, postingId) {
+        return employerModel
+            .findById(userId)
+            .then(function (user) {
+                user.postings.push(postingId);
+                return user.save();
+            });
+    }
 
     function createUser(user) {
         return employerModel.create(user);

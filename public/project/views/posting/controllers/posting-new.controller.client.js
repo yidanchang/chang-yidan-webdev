@@ -1,53 +1,49 @@
-// (function () {
-//     angular
-//         .module('WebAppMaker')
-//         .controller('websiteNewController', websiteNewController);
-//
-//     function websiteNewController($routeParams,
-//                                   $location,
-//                                   currentUser,
-//                                   websiteService) {
-//         var model = this;
-//         model.userId = currentUser._id;
-//         // model.userId = $routeParams['userId'];
-//         model.createWebsite = createWebsite;
-//
-//
-//         function init() {
-//             // model.websites = websiteService.findWebsitesByUser(model.userId);
-//             websiteService
-//                 .findAllWebsitesForUser(model.userId)
-//                 .then(renderWebsites);
-//         }
-//         init();
-//
-//         function renderWebsites(websites) {
-//             model.websites = websites;
-//         }
-//
-//         function createWebsite(website) {
-//             if(typeof website === 'undefined' || website.name === null || website.name === '' || typeof website.name === 'undefined') {
-//                 model.error = 'Website name is required';
-//                 return;
-//             }
-//             // if (typeof website === 'undefined') {
-//             //     model.error = "Fail to create! 'Name' and 'Description' cannot be empty";
-//             // }
-//
-//             websiteService
-//                 .createWebsite(model.userId, website)
-//                 .then(function () {
-//                     $location.url("/website");
-//                 })
-//
-//             // if (typeof website === 'undefined') {
-//             //     model.error = "Fail to create! Both 'Name' and 'Description' cannot be empty";
-//             // } else {
-//             //     website.developerId = model.userId;
-//             //     websiteService.createWebsite(website);
-//             //     $location.url('/user/'+model.userId+'/website');
-//             // }
-//         }
-//
-//     }
-// })();
+(function () {
+    angular
+        .module('JobApp')
+        .controller('postingNewController', postingNewController);
+
+    function postingNewController($routeParams,
+                                  $location,
+                                  currentUser,
+                                  postingService) {
+        var model = this;
+        model.userId = currentUser._id;
+        // model.userId = $routeParams['userId'];
+        model.createPosting = createPosting;
+
+
+        function init() {
+            // model.websites = postingService.findWebsitesByUser(model.userId);
+            postingService
+                .findAllPostingsForUser(model.userId)
+                .then(renderPostings);
+        }
+        init();
+
+        function renderPostings(postings) {
+            model.postings = postings;
+        }
+
+        function createPosting(posting) {
+            if(typeof posting === 'undefined' || posting.name === null || posting.name === '' || typeof posting.job_title === 'undefined') {
+                model.error = 'Job title of Posting is required';
+                return;
+            }
+            if (typeof posting.company === 'undefined' || posting.company === null || posting.company === '') {
+                model.error = 'Company of Posting is required';
+                return;
+            }
+            if (typeof posting.description === 'undefined' || posting.description === null || posting.description === '') {
+                model.error = 'Description of Posting is required';
+                return;
+            }
+            postingService
+                .createPosting(model.userId, posting)
+                .then(function () {
+                    $location.url("/posting");
+                })
+        }
+
+    }
+})();

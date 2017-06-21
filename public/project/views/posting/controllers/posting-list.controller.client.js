@@ -1,26 +1,36 @@
-// (function () {
-//     angular
-//         .module('WebAppMaker')
-//         .controller('websiteListController', websiteListController);
-//
-//     function websiteListController($routeParams,
-//                                    currentUser,
-//                                    websiteService) {
-//         var model = this;
-//
-//         model.userId = currentUser._id;
-//         // model.userId = $routeParams['userId'];
-//
-//         function init() {
-//             // model.websites = websiteService.findAllWebsitesForUser(model.userId);
-//             websiteService
-//                 .findAllWebsitesForUser(model.userId)
-//                 .then(renderWebsites);
-//         }
-//         init();
-//
-//         function renderWebsites(websites) {
-//             model.websites = websites;
-//         }
-//     }
-// })();
+(function () {
+    angular
+        .module('JobApp')
+        .controller('postingListController', postingListController);
+
+    function postingListController($routeParams,
+                                   currentUser,
+                                   postingService) {
+        var model = this;
+
+        model.userId = currentUser._id;
+        // model.userId = $routeParams['userId'];
+        // model.findPostingById = findPostingById;
+
+        function init() {
+            postingService
+                .findAllPostingsForUser(model.userId)
+                .then(renderPostings);
+        }
+        init();
+
+        function renderPostings(postings) {
+            model.postings = postings;
+        }
+
+        // function renderPosting(posting) {
+        //     model.posting = posting;
+        // }
+
+        // function findPostingById(postingId) {
+        //     postingService
+        //         .findPostingById(postingId)
+        //         .then(renderPosting);
+        // }
+    }
+})();

@@ -13,11 +13,11 @@
                     currentUser: checkCurrentUser
                 }
             })
-            // .when('/indeedSearch', {
-            //     templateUrl: 'views/indeedSearch/templates/indeed-search.view.client.html',
-            //     controller: 'indeedController',
-            //     controllerAs: 'model'
-            // })
+            .when('/indeedSearch', {
+                templateUrl: 'views/indeedSearch/templates/indeed-search.view.client.html',
+                controller: 'indeedController',
+                controllerAs: 'model'
+            })
             .when('/login', {
                 templateUrl: 'views/employer/templates/login.view.client.html',
                 controller: 'loginController',
@@ -31,6 +31,30 @@
             .when('/profile', {
                 templateUrl: 'views/employer/templates/profile.view.client.html',
                 controller: 'profileController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/posting', {
+                templateUrl: 'views/posting/templates/posting-list.view.client.html',
+                controller: 'postingListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/posting/new', {
+                templateUrl: 'views/posting/templates/posting-new.view.client.html',
+                controller: 'postingNewController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/posting/:postingId', {
+                templateUrl: 'views/posting/templates/posting-edit.view.client.html',
+                controller: 'postingEditController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn
