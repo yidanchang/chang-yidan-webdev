@@ -43,9 +43,9 @@ require ("./test/app.js")(app, mongoose);
 
 // require ("./test/app.js")(app);
 
-// require('./assignment/app');
+require('./assignment/app');
 
-require('./project/app.js')(app, mongoose);
+// require('./project/app.js')(app, mongoose);
 
 // require('./public/project/indeed.service.server');
 

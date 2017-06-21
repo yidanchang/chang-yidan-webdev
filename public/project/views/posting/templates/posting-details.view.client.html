@@ -1,28 +1,28 @@
-<!--<nav class="navbar navbar-default navbar-fixed-top">-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="navbar-header">-->
-            <!--<p class="navbar-text pull-left">-->
-                <!--<a href="#!/posting" class="navbar-link">-->
-                    <!--<span class="glyphicon glyphicon-arrow-left"></span>-->
-                <!--</a>-->
-            <!--</p>-->
-            <!--<a class="navbar-brand" href="#">-->
-                <!--Posting Details-->
-            <!--</a>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</nav>-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/posting" class="navbar-link">
+                    <span class="glyphicon glyphicon-arrow-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">
+                Posting Details
+            </a>
+        </div>
+    </div>
+</nav>
 
-<!--<div class="container-fluid">-->
-        <!--<ul class="list-group">-->
-            <!--<li class="list-group-item">-->
-                <!--<h3>{{model.posting.job_title}}</h3>-->
-                <!--<div class="company-detail"><i>{{model.posting.company}}</i>{{model.posting.location}}</div>-->
-                <!--<div class="date">{{model.posting.dateCreated}}</div>-->
-                <!--<div class="field"><p>{{model.posting.field}}</p></div>-->
-                <!--<div class="snippet"><p>{{model.posting.description}}</p></div>-->
-            <!--</li>-->
-        <!--</ul>-->
-<!--</div>-->
+<div class="container-fluid">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <h3>{{model.posting.job_title}}</h3>
+                <div class="company-detail"><i><b>Company: </b>{{model.posting.company}}</i>{{model.posting.location}}</div>
+                <div class="field"><p><b>Field: </b>{{model.posting.field}}</p></div>
+                <div class="snippet"><p><b>Description: </b>{{model.posting.description}}</p></div>
+                <div class="date">{{model.posting.dateCreated}}</div>
+            </li>
+        </ul>
+</div>
 
-<!--<div ng-include="'views/common/footer.view.client.html'"></div>-->
+<div ng-include="'views/common/footer.view.client.html'"></div>

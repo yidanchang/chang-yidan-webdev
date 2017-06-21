@@ -1,31 +1,27 @@
 (function() {
     angular
         .module("JobApp")
-        .controller("SearchUserController", SearchUserController);
+        .controller("searchUserController", searchUserController);
 
-    function SearchUserController(currentUser, $routeParams, $location, employerService) {
+    function searchUserController(currentUser, employerService) {
         var model = this;
 
         model.userId = currentUser._id;
-        model.searchUser = searchUser;
-        model.keyword = $routeParams.keyword;
+        model.searchByUsername = searchByUsername;
+        // model.keyword = $routeParams.keyword;
 
-        function init() {
-            employerService
-                .searchByUsername(model.keyword)
-                .then(function (response) {
-                    model.result = response.data;
-                    }, function (err) {
-                    model.error = "Sorry, not found related users for you!";
-                });
-        }
-
-        init();
-
-        function searchUser() {
-            if (model.keyword.length > 0) {
-                $location.url("/search/user/" + model.keyword);
+        function searchByUsername(keyword) {
+            if (typeof keyword === 'undefined' || keyword === '' || keyword === null) {
+                model.error = "Search content cannot be empty!";
+                return;
             }
+            employerService.searchByUsername(keyword).then(function (response) {
+                console.log(response);
+                model.result = response;
+                if (model.result.length === 0) {
+                    model.error = 'Not found any related users!';
+                }
+            });
         }
     }
 })();

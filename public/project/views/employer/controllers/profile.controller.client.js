@@ -19,6 +19,7 @@
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
         model.logout = logout;
+        // model.searchByUsername = searchByUsername;
 
         function init() {
             renderUser(currentUser);
@@ -27,6 +28,16 @@
             //     .then(renderUser, userError);
         }
         init();
+
+        // function searchByUsername(keyword) {
+        //     if (typeof keyword === 'undefined' || keyword === '' || keyword === null) {
+        //         model.error = "Search content cannot be empty!";
+        //         return;
+        //     }
+        //     employerService.searchByUsername(keyword).then(function () {
+        //         $location.url("/search/user/" + keyword);
+        //     });
+        // }
 
         function logout() {
             employerService

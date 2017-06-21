@@ -52,6 +52,14 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/posting/:postingId/details', {
+                templateUrl: 'views/posting/templates/posting-details.view.client.html',
+                controller: 'postingDetailsController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
             .when('/posting/:postingId', {
                 templateUrl: 'views/posting/templates/posting-edit.view.client.html',
                 controller: 'postingEditController',
@@ -60,17 +68,17 @@
                     currentUser: checkLoggedIn
                 }
             })
-            // .when('/search/location/:location/field/:field', {
-            //     templateUrl: 'views/user/templates/search.view.client.html',
-            //     controller: 'searchController',
-            //     controllerAs: 'model',
-            //     resolve: {
-            //         currentUser: checkLoggedIn
-            //     }
-            // })
-            .when('/search/user/:keyword', {
+            .when('/search/user', {
                 templateUrl: 'views/search/templates/searchUser.view.client.html',
                 controller: 'searchUserController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/search/posting', {
+                templateUrl: 'views/search/templates/searchPosting.view.client.html',
+                controller: 'searchPostingController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn

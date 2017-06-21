@@ -5,12 +5,12 @@
 
     function postingListController($routeParams,
                                    currentUser,
+                                   $location,
                                    postingService) {
         var model = this;
 
         model.userId = currentUser._id;
         // model.userId = $routeParams['userId'];
-        // model.findPostingById = findPostingById;
 
         function init() {
             postingService
@@ -22,15 +22,5 @@
         function renderPostings(postings) {
             model.postings = postings;
         }
-
-        // function renderPosting(posting) {
-        //     model.posting = posting;
-        // }
-
-        // function findPostingById(postingId) {
-        //     postingService
-        //         .findPostingById(postingId)
-        //         .then(renderPosting);
-        // }
     }
 })();

@@ -7,9 +7,15 @@ module.exports = function(app, models) {
     app.get("/api/project/posting/:postingId", findPostingById);
     app.put("/api/project/posting/:postingId", updatePosting);
     app.delete("/api/project/user/:userId/posting/:postingId", deletePosting);
-    app.get('/api/project/search/posting/:keyword', searchJobs);
-    // app.get("/api/project/posting/:postingId/details", findPostingById);
+    app.get('/api/project/search/posting/:keyword', searchByName);
+    app.get("/api/project/posting/:postingId/details", getPosting);
 
+    function getPosting(req, res) {
+        var postingId = req.params.postingId;
+        postingModel.getPosting(postingId).then(function (posting) {
+            res.json(posting);
+        })
+    }
     function findAllPostingsForUser(req, res) {
         var userId = req.params.userId;
         postingModel
@@ -28,7 +34,7 @@ module.exports = function(app, models) {
         // res.json(results);
     }
 
-    function searchJobs(req,res) {
+    function searchByName(req,res) {
         var keyword = req.params['keyword'];
         postingModel
             .searchByName(keyword)

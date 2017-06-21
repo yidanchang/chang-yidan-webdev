@@ -11,9 +11,13 @@ module.exports = function (mongoose) {
     postingModel.updatePosting = updatePosting;
     postingModel.findPostingById = findPostingById;
     postingModel.searchByName = searchByName;
+    postingModel.getPosting = getPosting;
 
     module.exports = postingModel;
 
+    function getPosting(postingId) {
+        return postingModel.findById(postingId);
+    }
     function searchByName(keyword) {
         return postingModel.find({"job_title": new RegExp(keyword, 'i')});
     }

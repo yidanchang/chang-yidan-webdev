@@ -10,9 +10,17 @@
             deletePosting : deletePosting,
             updatePosting : updatePosting,
             findPostingById : findPostingById,
-            searchByName : searchByName
+            searchByName : searchByName,
+            getPosting : getPosting
         };
         return api;
+
+        function getPosting(postingId) {
+            var url = '/api/project/posting/' + postingId + '/details';
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
+        }
 
         function searchByName(keyword) {
             var url = "/api/project/search/posting/" + keyword;
@@ -56,7 +64,6 @@
             var url = "/api/project/user/" + userId + "/posting";
             return $http.get(url)
                 .then(function (response) {
-                    console.log("client");
                     return response.data;
                 });
         }

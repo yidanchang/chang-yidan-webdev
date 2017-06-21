@@ -95,3 +95,8 @@ nav.navbar.navbar-default {
 .input-group-btn .btn-default{
     display: inherit;
 }
+
+.navbar-header .input-group-btn .btn-default {
+    /*position: absolute;*/
+    display: inherit;
+}
