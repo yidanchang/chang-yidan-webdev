@@ -10,7 +10,7 @@ module.exports = function (mongoose) {
         company: String,
         job_position: String,
         postings: [{type: mongoose.Schema.Types.ObjectId, ref: "Posting"}],
-        following: [{type: mongoose.Schema.Types.ObjectId, ref: "Employer"}],
+        followings: [{type: mongoose.Schema.Types.ObjectId, ref: "Employer"}],
         followers: [{type: mongoose.Schema.Types.ObjectId, ref: "Employer"}],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});

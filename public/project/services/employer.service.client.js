@@ -15,9 +15,25 @@
             register: register,
             updateUser: updateUser,
             deleteUser: deleteUser,
-            searchByUsername: searchByUsername
+            searchByUsername: searchByUsername,
+            findAllFollowings: findAllFollowings,
+            findAllFollowers: findAllFollowers
         };
         return api;
+
+        function findAllFollowings(userId) {
+            var url = "/api/project/user/" + userId + "/followings";
+            return $http.get(url).then(function (response) {
+                return response.data;
+            })
+        }
+
+        function findAllFollowers(userId) {
+            var url = "/api/project/user/" + userId + "/followers";
+            return $http.get(url).then(function (response) {
+                return response.data;
+            })
+        }
 
         function searchByUsername(keyword) {
             var url = "/api/project/search/user/" + keyword;

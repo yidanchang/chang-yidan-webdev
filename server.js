@@ -38,14 +38,14 @@ var mongoose = require("mongoose");
 mongoose.connect(connectionString);
 
 require ("./test/app.js")(app, mongoose);
-require ("./assignment/app.js")(app, mongoose);
+// require ("./assignment/app.js")(app, mongoose);
 
 
 // require ("./test/app.js")(app);
 
 // require('./assignment/app');
 
-// require('./project/app.js')(app, mongoose);
+require('./project/app.js')(app, mongoose);
 
 var port = process.env.PORT || 3000;
 

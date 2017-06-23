@@ -20,6 +20,34 @@ module.exports = function (app) {
     app.post('/api/project/logout', logout);
     app.post('/api/project/register', register);
     app.get('/api/project/search/user/:keyword', searchByUsername);
+    app.get('/api/project/user/:userId/followings', findAllFollowings);
+    app.get('/api/project/user/:userId/followers', findAllFollowers);
+
+    function findAllFollowings(req, res) {
+        var userId = req.params.userId;
+        employerModel.findUserById(userId)
+            .then(function (user) {
+                return employerModel.findAllFollowings(user.followings);
+            }, function (err) {
+                res.send(err);
+            })
+            .then(function (users) {
+                res.json(users);
+            });
+    }
+
+    function findAllFollowers(req, res) {
+        var userId = req.params.userId;
+        employerModel.findUserById(userId)
+            .then(function (user) {
+                return employerModel.findAllFollowers(user.followers);
+            }, function (err) {
+                res.send(err);
+            })
+            .then(function (users) {
+                res.json(users);
+            });
+    }
 
     function searchByUsername(req,res) {
         var keyword = req.params['keyword'];

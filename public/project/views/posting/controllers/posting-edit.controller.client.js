@@ -6,6 +6,7 @@
     function postingEditController($routeParams,
                                    $location,
                                    currentUser,
+                                   employerService,
                                    postingService) {
         var model = this;
 
@@ -14,6 +15,7 @@
         model.postingId = $routeParams.postingId;
         model.deletePosting = deletePosting;
         model.updatePosting = updatePosting;
+        model.logout = logout;
 
         function init() {
             postingService
@@ -22,7 +24,12 @@
 
             postingService
                 .findPostingById(model.postingId)
-                .then(renderPosting);
+                .then(renderPosting)
+                .then(function () {
+                employerService.findUserById(model.userId).then(function (user) {
+                    model.postings.username = user.username;
+                })
+            });
         }
         init();
 
@@ -34,6 +41,13 @@
             model.posting2 = posting;
         }
 
+        function logout() {
+            employerService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
+        }
 
         function deletePosting(userId, postingId) {
             postingService

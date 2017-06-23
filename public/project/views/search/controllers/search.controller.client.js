@@ -1,29 +1,17 @@
 (function() {
     angular
         .module("JobApp")
-        .controller("searchPostingController", searchPostingController);
+        .controller("searchController", searchController);
 
-    function searchPostingController(currentUser, $routeParams, $location, postingService, employerService) {
+    function searchController($routeParams, postingService, employerService) {
         var model = this;
 
-        model.userId = $routeParams['userId'];
-        if(!model.userId) {
-            model.userId = currentUser._id;
-            model.myPosts = true;
-        }
+        // model.userId = $routeParams['userId'];
+        model.myPosts = false;
 
         // model.userId = currentUser._id;
         model.searchByName = searchByName;
         model.findPostingById = findPostingById;
-        model.logout = logout;
-
-        function logout() {
-            employerService
-                .logout()
-                .then(function () {
-                    $location.url('/');
-                });
-        }
 
         function searchByName(keyword) {
             if (typeof keyword === 'undefined' || keyword === '' || keyword === null) {

@@ -11,18 +11,32 @@
         model.userId = currentUser._id;
         // model.userId = $routeParams['userId'];
         model.createPosting = createPosting;
+        model.logout = logout;
 
 
         function init() {
             // model.websites = postingService.findWebsitesByUser(model.userId);
             postingService
                 .findAllPostingsForUser(model.userId)
-                .then(renderPostings);
+                .then(renderPostings)
+                .then(function () {
+                    employerService.findUserById(model.userId).then(function (user) {
+                        model.postings.username = user.username;
+                    })
+                });
         }
         init();
 
         function renderPostings(postings) {
             model.postings = postings;
+        }
+
+        function logout() {
+            employerService
+                .logout()
+                .then(function () {
+                    $location.url('/');
+                });
         }
 
         function createPosting(posting) {

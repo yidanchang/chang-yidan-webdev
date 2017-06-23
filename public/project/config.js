@@ -13,10 +13,31 @@
                     currentUser: checkCurrentUser
                 }
             })
+            // .when("/", {
+            //     templateUrl: 'views/common/navbar-top.view.client.html',
+            //     controller: 'navbarController',
+            //     controllerAs: 'model',
+            //     resolve: {
+            //         currentUser: checkCurrentUser
+            //     }
+            // })
             .when('/indeedSearch', {
                 templateUrl: 'views/indeedSearch/templates/indeed-search.view.client.html',
                 controller: 'indeedController',
                 controllerAs: 'model'
+            })
+            .when('/search', {
+                templateUrl: 'views/search/templates/search.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model'
+            })
+            .when('/about', {
+                templateUrl: 'views/home/about.html',
+                controller: 'mainController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('/login', {
                 templateUrl: 'views/employer/templates/login.view.client.html',
@@ -37,6 +58,14 @@
                 }
             })
             .when('/posting', {
+                templateUrl: 'views/posting/templates/posting-list.view.client.html',
+                controller: 'postingListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/:userId/posting', {
                 templateUrl: 'views/posting/templates/posting-list.view.client.html',
                 controller: 'postingListController',
                 controllerAs: 'model',
@@ -79,6 +108,22 @@
             .when('/search/posting', {
                 templateUrl: 'views/search/templates/searchPosting.view.client.html',
                 controller: 'searchPostingController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/followings', {
+                templateUrl: 'views/follow/templates/following.view.client.html',
+                controller: 'followingController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/followers', {
+                templateUrl: 'views/follow/templates/followers.view.client.html',
+                controller: 'followersController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn

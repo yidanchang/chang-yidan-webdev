@@ -1,24 +1,63 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <!--<div class="container">-->
+    <div class="navbar-header">
+        <a class="navbar-brand pull-left active" href=""><span class="fa fa-edit"></span> Edit Postings</a>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <a href="#!/posting" class="navbar-link">
-                    <span class="glyphicon glyphicon-arrow-left"></span>
-                </a>
-            </p>
-            <a class="navbar-brand" href="#">
-                Edit Website
-            </a>
-            <p class="navbar-text pull-right">
-                <a ng-click="model.updatePosting(model.postingId, model.posting2)"
-                   class="navbar-link">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
-            </p>
-        </div>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!--<li><a href="#!/admin">Admin</a></li>-->
+                <!--<li class="active"><a href="#!/">Home</a></li>-->
+                <!--<li><a href="#!/admin">Admin</a></li>-->
+                <li><a href="#!/profile"><span class="fa fa-user"></span> Profile</a></li>
+                <li><a href="#!/posting"><span class="fa fa-file-text"></span> My Postings</a></li>
+                <li><a href="#!/search/posting"><span class="fa fa-search"></span> Search Posting</a></li>
+                <li><a ng-click="model.logout()"><span class="fa fa-sign-out"></span> Log out</a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-show="!model.currentUser._id"><a href="#!/"><span class="fa fa-home"></span> Home</a></li>
+                        <li><a href="#!/search/user"><span class="fa fa-user-circle-o"></span> Search User</a></li>
+                        <li><a href="#!/followers"><span class="fa fa-users"></span> Followers</a></li>
+                        <li><a href="#!/followings"><span class="fa fa-user-plus"></span> Followings</a></li>
+                        <li><a href="#!/indeedSearch"><span class="fa fa-info-circle"></span>  Search by Indeed</a></li>
+                        <li ng-show="model.currentUser._id" role="separator" class="divider"></li>
+                        <li class="dropdown-header">More</li>
+                        <li><a href="#!/about"><span class="fa fa-question"></span> About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
 </nav>
+
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="navbar-header">-->
+            <!--<p class="navbar-text pull-left">-->
+                <!--<a href="#!/posting" class="navbar-link">-->
+                    <!--<span class="glyphicon glyphicon-arrow-left"></span>-->
+                <!--</a>-->
+            <!--</p>-->
+            <!--<a class="navbar-brand" href="#">-->
+                <!--Edit Website-->
+            <!--</a>-->
+            <!--<p class="navbar-text pull-right">-->
+                <!--<a ng-click="model.updatePosting(model.postingId, model.posting2)"-->
+                   <!--class="navbar-link">-->
+                    <!--<span class="glyphicon glyphicon-ok"></span>-->
+                <!--</a>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</nav>-->
 
 <div class="container-fluid">
     <div ng-show="model.error" class="alert alert-danger">
@@ -56,7 +95,7 @@
                             {{posting.dateCreated | date : 'short'}}
                         </div>
                         <div class="col-md-3 hidden-sm hidden-xs">
-                            {{posting._employer.username}}
+                            {{model.postings.username}}
                         </div>
                         <div class="col-xs-1">
                             <a href="#!/posting/{{posting._id}}">
@@ -100,11 +139,14 @@
                       placeholder="Description..."
                       class="form-control"></textarea>
 
+            <a ng-click="model.updatePosting(model.postingId, model.posting2)"
+               class="btn btn-block btn-primary">
+                Update
+            </a>
             <a ng-click="model.deletePosting(model.userId, model.postingId)"
                class="btn btn-block btn-danger">
                 Delete
             </a>
-
             <a href="#!/posting"
                class="btn btn-block btn-success">
                 Cancel
@@ -113,4 +155,3 @@
     </div>
 </div>
 
-<div ng-include="'views/common/footer.view.client.html'"></div>

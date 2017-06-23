@@ -1,29 +1,28 @@
-(function() {
+(function () {
     angular
-        .module("JobApp")
-        .controller("searchUserController", searchUserController);
+        .module('JobApp')
+        .controller('followersController', followersController);
 
-    function searchUserController(currentUser, $location, $routeParams, employerService) {
+    function followersController($routeParams, $location, currentUser, employerService) {
         var model = this;
 
         model.userId = currentUser._id;
-        model.searchByUsername = searchByUsername;
-        model.id = $routeParams.userId;
-        model.amIfollowing = amIfollowing;
         model.follow = follow;
         model.unfollow = unfollow;
+        model.amIfollowing = amIfollowing;
         model.logout = logout;
 
-        // var following = {
-        //
-        // };
+        function init() {
+            employerService.findAllFollowers(model.userId).then(function (followers) {
+                console.log(followers);
+                model.followers = followers;
+                if (followers.length === 0) {
+                    model.message = "You have no followers.";
+                }
+            });
+        }
 
-        // function init() {
-        //     for(var u in currentUser.following) {
-        //         following.push(currentUser.following[u]);
-        //     }
-        // }
-        // init();
+        init();
 
         function logout() {
             employerService
@@ -34,24 +33,7 @@
         }
 
         function amIfollowing(otherUserId) {
-            // return typeof following != "undefined";
             return currentUser.followings.indexOf(otherUserId) > -1;
-        }
-
-        function searchByUsername(keyword) {
-            if (typeof keyword === 'undefined' || keyword === '' || keyword === null) {
-                model.error = "Search content cannot be empty!";
-                model.result = null;
-                return;
-            }
-            employerService.searchByUsername(keyword).then(function (response) {
-                model.error = null;
-                model.result = response;
-                if (model.result.length === 0) {
-                    model.error = 'Not found any related users!';
-                    model.result = null;
-                }
-            });
         }
 
         function follow(userId) {
@@ -89,5 +71,6 @@
                 });
             }
         }
+
     }
 })();

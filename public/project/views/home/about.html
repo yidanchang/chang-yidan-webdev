@@ -1,0 +1,51 @@
+
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <!--<div class="container">-->
+    <div class="navbar-header">
+        <a class="navbar-brand pull-left active" href="#!/about"><span class="fa fa-question"></span> About</a>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <!--<li class="active"><a href="#!/">Home</a></li>-->
+                <!--<li><a href="#!/admin">Admin</a></li>-->
+                <li ng-show="!model.currentUser._id"><a href="#!/"><span class="fa fa-home"></span> Home</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/login"><span class="fa fa-sign-in"></span> Login</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/register"><span class="fa fa-sign-in"></span> Register</a></li>
+                <li><a href="#!/indeedSearch"><span class="fa fa-info-circle"></span> Search by Indeed</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/search"><span class="fa fa-search"></span> Search Posting</a></li>
+                <li class="dropdown">
+                    <a ng-show="model.currentUser._id" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-show="model.currentUser._id"><a href="#!/profile"><span class="fa fa-user"></span> Profile</a></li>
+                        <li ng-show="model.currentUser._id"><a href="#!/search/posting"><span class="fa fa-search"></span> Search Posting</a></li>
+                        <li ng-show="model.currentUser._id"><a href="#!/search/user"><span class="fa fa-user-circle-o"></span> Search User</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+
+    </div>
+    <!--</div>-->
+</nav>
+
+<div class="bg-image">
+    <div class="header-content">
+        <div class="header-content-inner">
+            <h1>About</h1>
+            <hr>
+            <p>Employer could register/login to post the job positions for every user (include anonymous user) to search and read. Everyone could begin their career journey here.</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- /container -->
+

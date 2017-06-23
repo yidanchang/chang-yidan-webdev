@@ -13,9 +13,19 @@ module.exports = function (mongoose) {
     employerModel.addPostingToUser = addPostingToUser;
     employerModel.deletePostingFromUser = deletePostingFromUser;
     employerModel.searchByUsername = searchByUsername;
+    employerModel.findAllFollowings = findAllFollowings;
+    employerModel.findAllFollowers = findAllFollowers;
 
 
     module.exports = employerModel;
+
+    function findAllFollowings(following) {
+        return employerModel.find({_id: {$in: following}});
+    }
+
+    function findAllFollowers(follower) {
+        return employerModel.find({_id: {$in: follower}});
+    }
 
     function searchByUsername(keyword) {
         return employerModel.find({"username": new RegExp(keyword, 'i')});
