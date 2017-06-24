@@ -1,0 +1,122 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-header">
+        <a class="navbar-brand pull-left active" href="#!/admin/user"><span class="fa fa-address-book"></span> Users</a>
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li ng-show="model.currentUser._id"><a href="#!/"><span class="fa fa-home"></span> Home</a></li>
+                <li ng-show="model.currentUser.roles.indexOf('ADMIN') > -1"><a href="#!/admin"><span class="fa fa-id-card-o"></span> Admin</a></li>
+                <li ng-show="model.currentUser._id"><a ng-click="model.logout()"><span class="fa fa-question"></span> Log out</a></li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-show="model.currentUser._id"><a href="#!/profile"><span class="fa fa-user"></span> Profile</a></li>
+                        <li><a href="#!/posting"><span class="fa fa-file-text"></span> My Postings</a></li>
+                        <li><a href="#!/followings"><span class="fa fa-user-plus"></span> Following</a></li>
+                        <li><a href="#!/followers"><span class="fa fa-users"></span> Followers</a></li>
+                        <li ng-show="model.currentUser._id"><a href="#!/search/posting"><span class="fa fa-search"></span> Search Posting</a></li>
+                        <li ng-show="model.currentUser._id"><a href="#!/search/user"><span class="fa fa-user-circle-o"></span> Search User</a></li>
+                        <li><a href="#!/indeedSearch"><span class="fa fa-info-circle"></span> Search by Indeed</a></li>
+                        <li ng-show="model.currentUser._id" role="separator" class="divider"></li>
+                        <li class="dropdown-header">More</li>
+                        <li><a href="#!/about"><span class="fa fa-question"></span> About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <h3>Admin CRUD Users List</h3>
+    <br/>
+    <h4>Create A User</h4>
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="new-username">Username</label>
+            <input ng-model="_user.username"
+                   type="text"
+                   class="form-control"
+                   id="new-username">
+        </div>
+        <div class="form-group">
+            <label for="new-password">Password</label>
+            <input ng-model="_user.password"
+                   type="password"
+                   class="form-control"
+                   id="new-password">
+        </div>
+    </form>
+    <a class="btn btn-success btn-block"
+        ng-click="model.createUser(_user);_user={}">
+        Create
+    </a>
+
+
+    <form ng-show="model.edit">
+        <br/>
+        <h4>Edit A User</h4>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input ng-model="model.user.username"
+                   type="text"
+                   class="form-control"
+                   id="username">
+        </div>
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input ng-model="model.user.firstName"
+                   type="text"
+                   class="form-control"
+                   id="first-name"
+                   placeholder="Alice">
+        </div>
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input ng-model="model.user.lastName"
+                   type="text"
+                   class="form-control"
+                   id="last-name"
+                   placeholder="Wonderland">
+        </div>
+        <div class="form-group">
+            <label for="roles">Roles</label>
+            <input ng-model="model.user.roles"
+                   type="text"
+                   class="form-control"
+                   id="roles">
+        </div>
+        <a class="btn btn-info btn-block"
+           ng-click="model.updateUser(model.user);model.user={};model.cancel()">
+            Update
+        </a>
+        <a class="btn btn-danger btn-block"
+           ng-click="model.cancel()">
+            Cancel
+        </a>
+    </form>
+
+    <br/>
+    <h4>User List</h4>
+    <ul class="list-group">
+        <li ng-repeat="user in model.users" class="list-group-item">
+            <span ng-click="model.deleteUser(user)" class="fa fa-remove pull-right"></span>
+            <p><b>Username: </b>{{user.username}}</p>
+            <p><b>Name: </b>{{user.firstName + " " + user.lastName}}</p>
+            <p><b>Job Position: </b>{{user.job_position}}</p>
+            <p><b>Company: </b>{{user.company}}</p>
+            <p><b>Email: </b>{{user.email}}</p>
+            <span ng-click="model.editUser(user)" class="fa fa-edit pull-right"></span>
+            <p><b>Roles: </b>{{user.roles}}</p>
+        </li>
+    </ul>
+</div>

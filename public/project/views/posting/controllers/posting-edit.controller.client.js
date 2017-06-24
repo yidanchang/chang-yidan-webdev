@@ -10,7 +10,6 @@
                                    postingService) {
         var model = this;
 
-        // model.userId = $routeParams['userId'];
         model.userId = currentUser._id;
         model.postingId = $routeParams.postingId;
         model.deletePosting = deletePosting;
@@ -26,11 +25,12 @@
                 .findPostingById(model.postingId)
                 .then(renderPosting)
                 .then(function () {
-                employerService.findUserById(model.userId).then(function (user) {
-                    model.postings.username = user.username;
-                })
-            });
+                    employerService.findUserById(model.userId).then(function (user) {
+                        model.postings.username = user.username;
+                    })
+                });
         }
+
         init();
 
         function renderPostings(postings) {
@@ -58,7 +58,7 @@
         }
 
         function updatePosting(postingId, posting) {
-            if(typeof posting === 'undefined' || posting.name === null || posting.name === '' || typeof posting.job_title === 'undefined') {
+            if (typeof posting === 'undefined' || posting.name === null || posting.name === '' || typeof posting.job_title === 'undefined') {
                 model.error = 'Job title of Posting is required';
                 return;
             }

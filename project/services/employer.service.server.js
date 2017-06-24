@@ -1,4 +1,3 @@
-
 module.exports = function (app) {
     var employerModel = require('../models/employer/employer.model.server');
     var passport = require('passport');
@@ -12,16 +11,34 @@ module.exports = function (app) {
 
     app.post('/api/project/login', passport.authenticate('local'), login);
     app.get('/api/project/user/:userId', findUserById);
-    app.get('/api/project/user', findAllUsers);
-    app.post('/api/project/user', createUser);
+    app.get('/api/project/user', isAdmin, findAllUsers);
+    app.post('/api/project/user', isAdmin, createUser);
     app.put('/api/project/user/:userId', updateUser);
-    app.delete('/api/project/user/:userId', deleteUser);
+    app.delete('/api/project/user/:userId', isAdmin, deleteUser);
     app.get('/api/project/loggedin', loggedin);
     app.post('/api/project/logout', logout);
     app.post('/api/project/register', register);
+    app.post('/api/project/unregister', unregister);
     app.get('/api/project/search/user/:keyword', searchByUsername);
     app.get('/api/project/user/:userId/followings', findAllFollowings);
     app.get('/api/project/user/:userId/followers', findAllFollowers);
+    app.get('/api/project/checkAdmin', checkAdmin);
+
+    function isAdmin(req, res, next) {
+        if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+            next();
+        } else {
+            res.sendStatus(401);
+        }
+    }
+
+    function checkAdmin(req, res) {
+        if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+            res.json(req.user);
+        } else {
+            res.send('0');
+        }
+    }
 
     function findAllFollowings(req, res) {
         var userId = req.params.userId;
@@ -49,12 +66,12 @@ module.exports = function (app) {
             });
     }
 
-    function searchByUsername(req,res) {
+    function searchByUsername(req, res) {
         var keyword = req.params['keyword'];
         employerModel
             .searchByUsername(keyword)
             .then(
-                function(result) {
+                function (result) {
                     if (result) {
                         res.json(result);
                     } else {
@@ -75,6 +92,15 @@ module.exports = function (app) {
                     .login(user, function (status) {
                         res.send(status);
                     });
+            });
+    }
+
+    function unregister(req, res) {
+        employerModel
+            .deleteUser(req.user._id)
+            .then(function (user) {
+                req.logout();
+                res.sendStatus(200);
             });
     }
 
@@ -102,11 +128,6 @@ module.exports = function (app) {
                         return done(null, false);
                     }
                 },
-                //     if (!user) {
-                //         return done(null, false);
-                //     }
-                //     return done(null, user);
-                // },
                 function (err) {
                     if (err) {
                         return done(err);
@@ -143,36 +164,22 @@ module.exports = function (app) {
             .then(function (status) {
                 res.send(status);
             });
-        // for(var u in users) {
-        //     if(users[u]._id === userId) {
-        //         users.splice(u, 1);
-        //         res.sendStatus(200);
-        //         return;
-        //     }
-        // }
-        // res.sendStatus(404);
     }
 
     function updateUser(req, res) {
         var user = req.body;
         var userId = req.params.userId;
+        user.password = bcrypt.hashSync(user.password);
         employerModel
             .updateUser(userId, user)
             .then(function (status) {
                 res.send(status);
             });
-        // for(var u in users) {
-        //     if(users[u]._id === req.params.userId) {
-        //         users[u] = user;
-        //         res.sendStatus(200);
-        //         return;
-        //     }
-        // }
-        // res.sendStatus(404);
     }
 
     function createUser(req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         employerModel
             .createUser(user)
             .then(function (user) {
@@ -180,9 +187,6 @@ module.exports = function (app) {
             }, function (err) {
                 res.send(err);
             });
-        // user._id = (new Date()).getTime() + "";
-        // users.push(user);
-        // res.json(user);
     }
 
     function findUserById(req, res) {
@@ -192,13 +196,6 @@ module.exports = function (app) {
             .then(function (user) {
                 res.json(user);
             });
-        // for(var u in users) {
-        //     if(users[u]._id === userId) {
-        //         res.send(users[u]);
-        //         return;
-        //     }
-        // }
-        // res.sendStatus(404);
     }
 
     function findUserByUsername(req, res) {
@@ -214,17 +211,6 @@ module.exports = function (app) {
                     }
                 });
         }
-        // if(username) {
-        //     for(var u in users) {
-        //         var user = users[u];
-        //         if( user.username === username) {
-        //             res.json(user);
-        //             return;
-        //         }
-        //     }
-        //     res.sendStatus(404);
-        //     return;
-        // }
     }
 
     function findUserByCredentials(req, res) {
@@ -241,18 +227,6 @@ module.exports = function (app) {
                     }
                 });
         }
-        // if(username && password) {
-        //     for(var u in users) {
-        //         var user = users[u];
-        //         if( user.username === username &&
-        //             user.password === password) {
-        //             res.json(user);
-        //             return;
-        //         }
-        //     }
-        //     res.sendStatus(404);
-        //     return;
-        // }
     }
 
     function findAllUsers(req, res) {
@@ -260,35 +234,14 @@ module.exports = function (app) {
         var password = req.query.password;
         if (username && password) {
             findUserByCredentials(req, res);
-            // for(var u in users) {
-            //     var user = users[u];
-            //     if( user.username === username &&
-            //         user.password === password) {
-            //         res.json(user);
-            //         return;
-            //     }
-            // }
-            // res.sendStatus(404);
-            // return;
         } else if (username) {
             findUserByUsername(req, res);
-            // for(var u in users) {
-            //     var user = users[u];
-            //     if( user.username === username) {
-            //         res.json(user);
-            //         return;
-            //     }
-            // }
-            // res.sendStatus(404);
-            // return;
         } else {
             employerModel
                 .findAllUsers()
                 .then(function (users) {
                     res.json(users);
                 });
-            // res.json(users);
         }
     }
-
 };

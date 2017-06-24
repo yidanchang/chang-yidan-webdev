@@ -1,4 +1,4 @@
-(function() {
+(function () {
     angular
         .module("JobApp")
         .controller("searchUserController", searchUserController);
@@ -14,17 +14,6 @@
         model.unfollow = unfollow;
         model.logout = logout;
 
-        // var following = {
-        //
-        // };
-
-        // function init() {
-        //     for(var u in currentUser.following) {
-        //         following.push(currentUser.following[u]);
-        //     }
-        // }
-        // init();
-
         function logout() {
             employerService
                 .logout()
@@ -34,7 +23,6 @@
         }
 
         function amIfollowing(otherUserId) {
-            // return typeof following != "undefined";
             return currentUser.followings.indexOf(otherUserId) > -1;
         }
 
@@ -56,7 +44,7 @@
 
         function follow(userId) {
             var index = currentUser.followings.indexOf(userId);
-            if(index === -1) {
+            if (index === -1) {
                 currentUser.followings.push(userId);
                 employerService.updateUser(currentUser._id, currentUser)
                     .then(function () {

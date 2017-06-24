@@ -1,7 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <!--<div class="container">-->
     <div class="navbar-header">
-        <a class="navbar-brand pull-left active" href="#!/"><span class="fa fa-home"></span> Home</a>
+        <a class="navbar-brand pull-left active" href="#!/admin"><span class="fa fa-id-card-o"></span> Admin</a>
 
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -11,21 +10,18 @@
         </button>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <!--<li class="active"><a href="#!/">Home</a></li>-->
-                <!--<li><a href="#!/admin">Admin</a></li>-->
-                <li ng-show="!model.currentUser._id"><a href="#!/login"><span class="fa fa-sign-in"></span> Login</a></li>
-                <li ng-show="!model.currentUser._id"><a href="#!/register"><span class="fa fa-sign-in"></span> Register</a></li>
+                <li ng-show="model.currentUser._id"><a href="#!/"><span class="fa fa-home"></span> Home</a></li>
                 <li ng-show="model.currentUser._id"><a href="#!/profile"><span class="fa fa-user"></span> Profile</a></li>
-                <li><a href="#!/indeedSearch"><span class="fa fa-info"></span> Search by Indeed</a></li>
-                <li ng-show="!model.currentUser._id"><a href="#!/search"><span class="fa fa-search"></span> Search Posting</a></li>
+                <li><a href="#!/posting"><span class="fa fa-file-text"></span> My Postings</a></li>
+                <li><a href="#!/followings"><span class="fa fa-user-plus"></span> Following</a></li>
+                <li><a href="#!/followers"><span class="fa fa-users"></span> Followers</a></li>
                 <li ng-show="model.currentUser._id"><a ng-click="model.logout()"><span class="fa fa-question"></span> Log out</a></li>
                 <li class="dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li ng-show="model.currentUser._id"><a href="#!/search/posting"><span class="fa fa-search"></span> Search Posting</a></li>
                         <li ng-show="model.currentUser._id"><a href="#!/search/user"><span class="fa fa-user-circle-o"></span> Search User</a></li>
-                        <li ng-show="model.currentUser._id"><a href="#!/followings"><span class="fa fa-user-plus"></span> Following</a></li>
-                        <li ng-show="model.currentUser._id"><a href="#!/followers"><span class="fa fa-users"></span> Followers</a></li>
+                        <li><a href="#!/indeedSearch"><span class="fa fa-info-circle"></span> Search by Indeed</a></li>
                         <li ng-show="model.currentUser._id" role="separator" class="divider"></li>
                         <li class="dropdown-header">More</li>
                         <li><a href="#!/about"><span class="fa fa-question"></span> About</a></li>
@@ -33,7 +29,17 @@
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
-
     </div>
-    <!--</div>-->
 </nav>
+
+<div class="container-fluid">
+    <h3>Admin CRUD List</h3>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="#!/admin/user">Users</a>
+        </li>
+        <li class="list-group-item">
+            <a href="#!/admin/posting">Postings</a>
+        </li>
+    </ul>
+</div>

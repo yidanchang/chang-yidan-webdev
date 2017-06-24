@@ -1,4 +1,3 @@
-// var mongoose = require('mongoose');
 module.exports = function (mongoose) {
 
     var postingSchema = require('./posting.schema.server');
@@ -63,8 +62,4 @@ module.exports = function (mongoose) {
         return postingModel
             .findById(postingId);
     }
-
-    // function searchJobs(searchObj) {
-    //     return postingModel.find(searchObj);
-    // }
 };

@@ -1,4 +1,3 @@
-// var mongoose = require('mongoose');
 module.exports = function (mongoose) {
     var employerSchema = require('./employer.schema.server.js');
     var employerModel = mongoose.model('Employer', employerSchema);
@@ -51,6 +50,7 @@ module.exports = function (mongoose) {
     }
 
     function createUser(user) {
+        user.roles = ['USER'];
         return employerModel.create(user);
     }
 
@@ -71,8 +71,6 @@ module.exports = function (mongoose) {
     }
 
     function updateUser(userId, newUser) {
-        delete newUser.username;
-        delete newUser.password;
         return employerModel.update({_id: userId}, {$set: newUser});
     }
 

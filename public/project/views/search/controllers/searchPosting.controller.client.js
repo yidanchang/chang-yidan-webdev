@@ -12,7 +12,6 @@
             model.myPosts = true;
         }
 
-        // model.userId = currentUser._id;
         model.searchByName = searchByName;
         model.findPostingById = findPostingById;
         model.logout = logout;

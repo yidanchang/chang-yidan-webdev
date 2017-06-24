@@ -26,5 +26,12 @@
 }
 
 .indeedlink {
-    text-align: right;
+    text-align: left;
+    /*margin-right: auto;*/
+}
+
+.indeedlink img {
+    border: 0;
+    vertical-align: middle;
+    width: auto;
 }

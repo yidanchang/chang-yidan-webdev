@@ -1,9 +1,9 @@
 (function () {
     angular
         .module('JobApp')
-        .controller('navbarController', navbarController);
+        .controller('adminController', adminController);
 
-    function navbarController(currentUser, employerService, $location) {
+    function adminController(currentUser, employerService, $location) {
         var model = this;
         model.currentUser = currentUser;
         model.logout = logout;

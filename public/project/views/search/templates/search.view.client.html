@@ -1,9 +1,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <!--<div class="container">-->
     <div class="navbar-header">
         <a class="navbar-brand pull-left active" href="#!/search"><span class="fa fa-search"></span> Search Posting</a>
 
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -11,13 +11,14 @@
         </button>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <!--<li class="active"><a href="#!/">Home</a></li>-->
-                <!--<li><a href="#!/admin">Admin</a></li>-->
-                <li ng-show="!model.currentUser._id"><a href="#!/login"><span class="fa fa-sign-in"></span> Login</a></li>
-                <li ng-show="!model.currentUser._id"><a href="#!/register"><span class="fa fa-sign-in"></span> Register</a></li>
+                <li ng-show="!model.currentUser._id"><a href="#!/login"><span class="fa fa-sign-in"></span> Login</a>
+                </li>
+                <li ng-show="!model.currentUser._id"><a href="#!/register"><span class="fa fa-sign-in"></span> Register</a>
+                </li>
                 <li><a href="#!/indeedSearch"><span class="fa fa-info-circle"></span> Search by Indeed</a></li>
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header">More</li>
                         <li><a href="#!/about"><span class="fa fa-question"></span> About</a></li>
@@ -25,28 +26,10 @@
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
-
     </div>
-    <!--</div>-->
 </nav>
-<!--<nav class="navbar navbar-default navbar-fixed-top">-->
-    <!--<div class="container-fluid">-->
-        <!--<div class="navbar-header">-->
-            <!--<p class="navbar-text pull-left">-->
-                <!--<a href="#!/profile" class="navbar-link">-->
-                    <!--<span class="glyphicon glyphicon-arrow-left"></span>-->
-                <!--</a>-->
-            <!--</p>-->
-            <!--<a class="navbar-brand" href="#">-->
-                <!--Search Job Posting-->
-            <!--</a>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</nav>-->
 
 <div class="container-fluid">
-
-    <!--{{model.jobs}}-->
     <div class="input-group">
         <input ng-model="model.keyword"
                type="text"
@@ -83,12 +66,12 @@
         <div class="date">{{model.posting.dateCreated}}</div>
         <div class="snippet"><p>{{model.posting.description}}</p></div>
         <div ng-if="model.posting.username === null" class="poster-error">
-            <p ng-if="model.posting.username === null" class="error">The user who posted this posting has been unregistered.</p>
+            <p ng-if="model.posting.username === null" class="error">The user who posted this posting has been
+                unregistered.</p>
         </div>
         <div ng-if="model.posting.username" class="poster">
             <p ng-if="model.posting._employer === model.userId">Post By Yourself</p>
-            <p ng-if="model.posting._employer !== model.userId">Post By User
-                <a href="#!/user/{{model.posting._employer}}/posting">{{model.posting.username}}</a>
+            <p ng-if="model.posting._employer !== model.userId">Post By User {{model.posting.username}}</a>
             </p>
         </div>
     </div>

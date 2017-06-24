@@ -11,7 +11,7 @@
         var model = this;
 
         model.userId = $routeParams['userId'];
-        if(!model.userId) {
+        if (!model.userId) {
             model.userId = currentUser._id;
             model.myPosts = true;
         }
@@ -27,6 +27,7 @@
                     })
                 });
         }
+
         init();
 
         function renderPostings(postings) {

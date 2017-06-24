@@ -1,5 +1,4 @@
 module.exports = function (mongoose) {
-    // var mongoose = require('mongoose');
 
     var employerSchema = mongoose.Schema({
         username: {type: String, unique: true},
@@ -12,6 +11,7 @@ module.exports = function (mongoose) {
         postings: [{type: mongoose.Schema.Types.ObjectId, ref: "Posting"}],
         followings: [{type: mongoose.Schema.Types.ObjectId, ref: "Employer"}],
         followers: [{type: mongoose.Schema.Types.ObjectId, ref: "Employer"}],
+        roles: [{type: String, default: 'USER', enum: ['USER', 'ADMIN']}],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "project.user"});
 

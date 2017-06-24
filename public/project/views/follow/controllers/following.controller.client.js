@@ -3,7 +3,7 @@
         .module('JobApp')
         .controller('followingController', followingController);
 
-    function followingController($routeParams, $location, currentUser, employerService) {
+    function followingController($routeParams, currentUser, employerService) {
         var model = this;
 
         model.userId = currentUser._id;
@@ -13,7 +13,6 @@
 
         function init() {
             employerService.findAllFollowings(model.userId).then(function (followings) {
-                console.log(followings);
                 model.followings = followings;
                 if (followings.length === 0) {
                     model.message = "You have no followings.";
@@ -45,7 +44,6 @@
                         var index1 = user.followers.indexOf(currentUser._id);
                         if (index1 !== 1) {
                             user.followers.splice(index1, 1);
-                            console.log(user.followers);
                             employerService.updateUser(userId, user);
                         }
                     });

@@ -1,6 +1,5 @@
 <div ng-controller="loginController" class="container-fluid">
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <!--<div class="container">-->
         <div class="navbar-header">
             <a class="navbar-brand pull-left active" href="#!/login"><span class="fa fa-sign-in"></span> Login</a>
 
@@ -12,7 +11,6 @@
             </button>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <!--<li><a href="#!/admin">Admin</a></li>-->
                     <li ng-show="!model.currentUser._id"><a href="#!/"><span class="fa fa-home"></span> Home</a></li>
                     <li ng-show="!model.currentUser._id"><a href="#!/register"><span class="fa fa-sign-in"></span> Register</a></li>
                     <li><a href="#!/indeedSearch"><span class="fa fa-info-circle"></span> Search by Indeed</a></li>
@@ -30,7 +28,6 @@
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
-
         </div>
     </nav>
 

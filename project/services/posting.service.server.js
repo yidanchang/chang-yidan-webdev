@@ -1,4 +1,4 @@
-module.exports = function(app, models) {
+module.exports = function (app, models) {
 
     var postingModel = require('../models/posting/posting.model.server');
 
@@ -16,6 +16,7 @@ module.exports = function(app, models) {
             res.json(posting);
         })
     }
+
     function findAllPostingsForUser(req, res) {
         var userId = req.params.userId;
         postingModel
@@ -23,23 +24,14 @@ module.exports = function(app, models) {
             .then(function (postings) {
                 res.json(postings);
             })
-        // var results = [];
-        //
-        // for(var v in websites) {
-        //     if(websites[v].developerId === req.params.userId) {
-        //         results.push(websites[v]);
-        //     }
-        // }
-        //
-        // res.json(results);
     }
 
-    function searchByName(req,res) {
+    function searchByName(req, res) {
         var keyword = req.params['keyword'];
         postingModel
             .searchByName(keyword)
             .then(
-                function(result) {
+                function (result) {
                     if (result) {
                         res.json(result);
                     } else {
@@ -57,20 +49,20 @@ module.exports = function(app, models) {
         var userId = req.params['userId'];
         postingModel
             .createPostingForUser(userId, posting)
-            .then(function(newPosting) {
-                    res.json(newPosting);
-                }, function(error) {
-                    res.send(error);
-                });
+            .then(function (newPosting) {
+                res.json(newPosting);
+            }, function (error) {
+                res.send(error);
+            });
     }
 
     function findPostingById(req, res) {
         var postingId = req.params['postingId'];
         postingModel
             .findPostingById(postingId)
-            .then(function(posting) {
-                    res.json(posting);
-                });
+            .then(function (posting) {
+                res.json(posting);
+            });
     }
 
     function updatePosting(req, res) {

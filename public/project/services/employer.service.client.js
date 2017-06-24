@@ -13,14 +13,34 @@
             logout: logout,
             loggedin: loggedin,
             register: register,
+            unregister: unregister,
             updateUser: updateUser,
             deleteUser: deleteUser,
             searchByUsername: searchByUsername,
             findAllFollowings: findAllFollowings,
-            findAllFollowers: findAllFollowers
+            findAllFollowers: findAllFollowers,
+            checkAdmin: checkAdmin,
+            findAllUsers: findAllUsers
         };
         return api;
 
+        function findAllUsers() {
+            var url = "/api/project/user";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkAdmin() {
+            var url = "/api/project/checkAdmin";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        
         function findAllFollowings(userId) {
             var url = "/api/project/user/" + userId + "/followings";
             return $http.get(url).then(function (response) {
@@ -43,6 +63,14 @@
         }
         function register(userObj) {
             var url = "/api/project/register";
+            return $http.post(url, userObj)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        
+        function unregister(userObj) {
+            var url = "/api/project/unregister";
             return $http.post(url, userObj)
                 .then(function (response) {
                     return response.data;

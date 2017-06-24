@@ -1,9 +1,7 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <!--<div class="container">-->
     <div class="navbar-header">
         <a class="navbar-brand pull-left active" href="#!/profile"><span class="fa fa-user"></span>Profile</a>
-
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                 aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -13,9 +11,7 @@
         </button>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <!--<li><a href="#!/admin">Admin</a></li>-->
-                <!--<li class="active"><a href="#!/">Home</a></li>-->
-                <!--<li><a href="#!/admin">Admin</a></li>-->
+                <li ng-show="model.isAdmin"><a href="#!/admin"><span class="fa fa-id-card-o"></span> Admin</a></li>
                 <li><a href="#!/posting"><span class="fa fa-file-text"></span> My Postings</a></li>
                 <li><a href="#!/followings"><span class="fa fa-user-plus"></span> Following</a></li>
                 <li><a href="#!/followers"><span class="fa fa-users"></span> Followers</a></li>
@@ -35,7 +31,6 @@
                 </li>
             </ul>
         </div><!--/.nav-collapse -->
-
     </div>
 </nav>
 
@@ -54,11 +49,19 @@
     <form name="form1">
         <div class="form-group">
             <label for="username">Username</label>
-            <input ng-model="model.user.username"
+            <input readonly
+                   ng-model="model.user.username"
                    type="text"
                    class="form-control"
                    id="username"
                    placeholder="Username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password"
+                   id="password"
+                   ng-model="model.user.password"
+                   class="form-control"/>
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
@@ -111,5 +114,9 @@
        ng-click="model.updateUser(model.userId, model.user)"
        ng-hide="form1.email.$error.email">
         Update
+    </a>
+    <a class="btn btn-danger btn-block"
+       ng-click="model.unregister()">
+        UnRegister
     </a>
 </div>

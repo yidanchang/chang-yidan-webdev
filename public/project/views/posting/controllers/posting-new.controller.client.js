@@ -3,19 +3,16 @@
         .module('JobApp')
         .controller('postingNewController', postingNewController);
 
-    function postingNewController($routeParams,
-                                  $location,
+    function postingNewController($location,
                                   currentUser,
                                   postingService) {
         var model = this;
         model.userId = currentUser._id;
-        // model.userId = $routeParams['userId'];
         model.createPosting = createPosting;
         model.logout = logout;
 
 
         function init() {
-            // model.websites = postingService.findWebsitesByUser(model.userId);
             postingService
                 .findAllPostingsForUser(model.userId)
                 .then(renderPostings)
@@ -25,6 +22,7 @@
                     })
                 });
         }
+
         init();
 
         function renderPostings(postings) {
@@ -40,7 +38,7 @@
         }
 
         function createPosting(posting) {
-            if(typeof posting === 'undefined' || posting.name === null || posting.name === '' || typeof posting.job_title === 'undefined') {
+            if (typeof posting === 'undefined' || posting.name === null || posting.name === '' || typeof posting.job_title === 'undefined') {
                 model.error = 'Job title of Posting is required';
                 return;
             }

@@ -11,7 +11,6 @@
         var model = this;
 
         model.userId = currentUser._id;
-        // model.userId = $routeParams['userId'];
         model.postingId = $routeParams['postingId'];
         model.logout = logout;
 
@@ -26,6 +25,7 @@
                     $location.url('/posting/' + model.postingId + '/details')
                 });
         }
+
         init();
 
         function logout() {

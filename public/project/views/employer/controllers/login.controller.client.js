@@ -19,7 +19,6 @@
             }
             employerService
                 .login(username, password)
-                // .findUserByCredentials(username, password)
                 .then(function (found) {
                     if (found !== null) {
                         $location.url('/profile');

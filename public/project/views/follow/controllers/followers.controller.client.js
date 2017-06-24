@@ -45,9 +45,7 @@
                         employerService.findUserById(userId).then(function (user) {
                             var index1 = user.followers.indexOf(currentUser._id);
                             if (index1 === -1) {
-                                console.log(user.followers);
                                 user.followers.push(currentUser._id);
-                                console.log(user.followers);
                                 employerService.updateUser(userId, user);
                             }
                         });
@@ -64,7 +62,6 @@
                         var index1 = user.followers.indexOf(currentUser._id);
                         if (index1 !== 1) {
                             user.followers.splice(index1, 1);
-                            console.log(user.followers);
                             employerService.updateUser(userId, user);
                         }
                     });

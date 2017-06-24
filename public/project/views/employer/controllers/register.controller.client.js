@@ -56,19 +56,6 @@
                                 $location.url('/profile');
                             })
                     });
-
-            // var found = employerService.findUserByUsername(username);
-            //
-            // if(found !== null) {
-            //     model.error = "Sorry, that username is taken";
-            // } else {
-            //     var newUser = {
-            //         username: username,
-            //         password: password
-            //     };
-            //     newUser = employerService.createUser(newUser);
-            //     $location.url('/user/' + newUser._id);
-            // }
         }
     }
 })();
