@@ -14,9 +14,13 @@ module.exports = function (mongoose) {
     employerModel.searchByUsername = searchByUsername;
     employerModel.findAllFollowings = findAllFollowings;
     employerModel.findAllFollowers = findAllFollowers;
-
+    employerModel.findUserByGoogleId = findUserByGoogleId;
 
     module.exports = employerModel;
+    
+    function findUserByGoogleId(googleId) {
+        return employerModel.findOne({'google.id': googleId});
+    }
 
     function findAllFollowings(following) {
         return employerModel.find({_id: {$in: following}});

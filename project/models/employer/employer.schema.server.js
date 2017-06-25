@@ -8,6 +8,10 @@ module.exports = function (mongoose) {
         email: String,
         company: String,
         job_position: String,
+        google: {
+            id: String,
+            token: String
+        },
         postings: [{type: mongoose.Schema.Types.ObjectId, ref: "Posting"}],
         followings: [{type: mongoose.Schema.Types.ObjectId, ref: "Employer"}],
         followers: [{type: mongoose.Schema.Types.ObjectId, ref: "Employer"}],
